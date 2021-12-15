@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+.search {
+    width: 75%;
+    position: absolute;
+    top: 32px;
+    left: 48px;
+    // justify-self: center;
+    border: none;
+    border-radius: 8px;
+    padding: 8.5px;
+    direction: rtl;
+    font-size: 12px;
+    font-weight: 24px;
+    @media (min-width: $device-md) {
+        width: 85%;
+    }
+}

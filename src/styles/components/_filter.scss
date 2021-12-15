@@ -1,0 +1,23 @@
+@use "../variables" as *;
+.form {
+    .form-select {
+        background: none !important;
+        border: none !important;
+        padding: 0px 21px 0px 0px;
+        width: 80% !important;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 24px;
+        color: $light-grey;
+        &:focus {
+            box-shadow: none;
+        }
+        option {
+            &:first-child {
+                display: none;
+            }
+            color: $secondary;
+        }
+    }
+}

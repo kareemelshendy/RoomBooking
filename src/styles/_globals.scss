@@ -1,0 +1,55 @@
+@use "./variables" as *;
+html,
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: "Cairo" !important;
+    // &::-webkit-scrollbar {
+    //     width: 10px;
+    // }
+    // &::-webkit-scrollbar-track {
+    //     background-color: #eeeeba;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: $primary;
+    //     border-radius: 20px;
+    //     border: 1px solid #ddd
+    // }
+}
+
+a {
+    text-decoration: none !important;
+}
+
+::placeholder {
+    color: #d2d2d2 !important;
+}
+
+.error {
+    border: 2px solid $fav;
+}
+
+.container {
+    padding: 0px !important;
+}
+
+.row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.search {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+}
+
+.search input {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    width: 100%;
+}

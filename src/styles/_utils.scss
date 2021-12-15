@@ -1,0 +1,85 @@
+@use './variables' as *;
+.heading {
+    line-height: 32px;
+    font-family: "Cairo";
+    margin: 0px;
+    padding: 0px;
+    // direction: rtl;
+    &-1 {
+        font-size: 20px;
+        @media (min-width: 576px) {
+            font-size: 28px;
+        }
+    }
+    &-2 {
+        font-size: 24px;
+    }
+    &-3 {
+        font-size: 20px;
+    }
+    &-4 {
+        font-size: 16px;
+    }
+    &-5 {
+        font-size: 14px;
+    }
+    &-normal {
+        font-weight: 400;
+    }
+    &-semiBold {
+        font-weight: 600;
+    }
+    &-bold {
+        font-weight: 700;
+    }
+    &-white {
+        color: #fff;
+    }
+    &-dark {
+        color: $dark !important;
+    }
+    &-secondary {
+        color: $secondary !important;
+    }
+    &-primary {
+        color: $primary !important;
+    }
+    &-lightGrey {
+        color: $light-grey !important;
+    }
+    &-darkGrey {
+        color: $dark-grey !important
+    }
+}
+
+.mr-t {
+    &-1 {
+        margin-top: 1rem !important;
+    }
+    &-2 {
+        margin-top: 1.5rem !important;
+    }
+    &-3 {
+        margin-top: 2rem !important;
+    }
+    &-4 {
+        margin-top: 4rem !important;
+    }
+}
+
+.btn-p {
+    padding: 11px 0px !important;
+}
+
+.border-r {
+    border-radius: 8px !important;
+}
+
+.pargraph {
+    &-small {
+        font-size: 12px;
+    }
+    &-md {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,191 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+.navbar {
+    // padding: 0px 20px !important;
+    width: 100% !important;
+    padding: 0px !important;
+    // position: sticky;
+    &-nav {
+        height: 100% !important;
+        align-items: flex-start;
+        @media (min-width: $device-md) {
+            align-items: center;
+        }
+    }
+    &-brand {
+        margin-right: 12px !important;
+    }
+    .container {
+        padding: 3px 0px 3px 12px !important;
+        @media (min-width: $device-lg) {
+            // margin: 0px 141px !important;
+        }
+        .nav-item {
+            .nav-link {
+                display: flex;
+                align-items: center !important;
+                &::after {
+                    display: none !important;
+                }
+            }
+        }
+        .dropdown {
+            .profile {
+                display: flex !important;
+                align-items: flex-end !important;
+                flex-direction: row;
+                height: 100%;
+                @media (min-width: $device-md) {
+                    flex-direction: row;
+                    align-items: center !important;
+                }
+            }
+            &-text {
+                font-size: 12px;
+                margin: 0px;
+                font-weight: 700;
+                color: $secondary;
+                align-self: center;
+                margin-left: 4px;
+            }
+            &-img {
+                border-radius: 50%;
+            }
+            &-down {
+                margin-left: 4px;
+            }
+            &-notifications,
+            &-chat {
+                position: relative;
+                margin: 16px 22px;
+                font-weight: 700;
+                @include align-center;
+                .icon {
+                    color: $secondary !important;
+                    font-size: 24px;
+                }
+                .number {
+                    position: absolute;
+                    top: -4px;
+                    left: -4px;
+                    padding: 2px 4px 2px 3px;
+                    border-radius: 50%;
+                    line-height: 10px;
+                    background-color: $fav;
+                    // @include align-center;
+                    p {
+                        margin: 0;
+                        font-size: 12px;
+                        padding: 0 !important;
+                        color: $white;
+                    }
+                }
+            }
+            &-chat {
+                @media (min-width: $device-md) {
+                    margin: 0px 25px 0px 0px;
+                }
+            }
+            &-notifications {
+                @media (min-width: $device-md) {
+                    margin: 0px 32px 0px 22px;
+                }
+            }
+            .dropdown-menu {
+                color: $dark !important;
+                text-align: right !important;
+                border-radius: 8px !important;
+                max-width: 285px !important;
+                padding: 12px 0px !important;
+                position: absolute !important;
+                // z-index: 0;
+                max-height: 392px !important;
+                top: 32px !important;
+                left: 45px !important;
+                overflow-y: auto;
+                @media (min-width: $device-md) {
+                    top: 30px !important;
+                    left: 0px !important;
+                }
+                .profile {
+                    font-size: 14px !important;
+                    font-weight: 400 !important;
+                    border-right: 1px solid transparent;
+                    padding: 10px 7.5px;
+                    direction: rtl;
+                    &:hover {
+                        background-color: #fbfbfb !important;
+                        border-right: 1px solid $primary;
+                    }
+                }
+                .notification {
+                    &:hover {
+                        background-color: #fbfbfb !important;
+                    }
+                    .text {
+                        font-size: 14px !important;
+                        text-align: right !important;
+                        overflow: hidden !important;
+                        text-overflow: ellipsis !important;
+                        color: $secondary !important;
+                    }
+                    .time {
+                        color: $dark-grey;
+                    }
+                }
+                .messages {
+                    display: flex;
+                    align-items: center;
+                    &-img {
+                        width: 47px;
+                        height: 47px;
+                        border-radius: 50%;
+                        // background-color: red;
+                        align-self: flex-start;
+                        .image {
+                            border-radius: 50%;
+                        }
+                    }
+                    .chat-content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        // align-items: center;
+                        flex: 3;
+                        margin-right: 8px;
+                        width: 172px;
+                        .username {
+                            font-size: 12px;
+                            line-height: 23px;
+                            font-weight: 600;
+                            color: $secondary;
+                        }
+                        .message {
+                            font-size: 10px;
+                            line-height: 19px;
+                            overflow: hidden !important;
+                            text-overflow: ellipsis !important;
+                            color: $dark-grey;
+                        }
+                    }
+                    .number {
+                        font-size: 10px;
+                        padding: 2px 4.5px;
+                        background: #00e358;
+                        border-radius: 50%;
+                        color: $white;
+                        font-weight: 700;
+                        line-height: 10px;
+                        p {
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dropdown-toggle {
+    padding: 0px !important;
+}

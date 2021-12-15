@@ -1,0 +1,21 @@
+@use "../../styles/variables" as *;
+.form {
+    font-size: 14px;
+    label {
+        margin-right: 8px;
+        line-height: 24px;
+    }
+    .span_red {
+        color: $fav;
+    }
+    .new {
+        color: $primary;
+    }
+    .errorMessage {
+        font-size: 12px;
+        margin-top: 6px;
+        margin-right: 8px;
+        line-height: 23px;
+        color: $fav;
+    }
+}

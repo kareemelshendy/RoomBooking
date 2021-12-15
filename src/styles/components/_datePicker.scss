@@ -1,0 +1,75 @@
+@use "../variables" as *;
+.react-datepicker-wrapper {
+    width: 65% !important;
+    .react-datepicker__input-container {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+}
+
+.react-datepicker {
+    border: none !important;
+    width: 300px;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+    &__triangle::after {
+        border-bottom-color: $white !important;
+    }
+    &__navigation {
+        top: 50% !important;
+        transform: translateY(-50%);
+        width: 49px !important;
+        height: 49px !important;
+        &--previous,
+        &--next {
+            background-color: $white !important;
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+            display: flex !important;
+            align-items: center !important;
+            border-radius: 50% !important;
+        }
+        &--previous {
+            left: -23px !important;
+        }
+        &--next {
+            right: -23px !important;
+        }
+        &-icon--previous::before,
+        &-icon--next::before {
+            border-color: $primary !important;
+            border-width: 2px 2px 0 0 !important;
+            top: 12px !important;
+        }
+        &-icon--previous::before {
+            left: -7px !important;
+        }
+        &-icon--next::before {
+            // right: -5px !important;
+            left: -3px !important;
+        }
+    }
+    &__month-container {
+        width: 100%;
+    }
+    &__header {
+        background-color: $white !important;
+    }
+    &__current-month {
+        color: $light-grey !important;
+        font-size: 16px;
+        font-family: "Cairo" !important;
+        font-weight: 400 !important;
+    }
+    &__day-name {
+        font-size: 12px;
+        font-weight: bold;
+        color: $light-grey !important;
+    }
+    &__day--selected {
+        border-radius: 50% !important;
+        background-color: $primary !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+        padding: 0 !important;
+    }
+}

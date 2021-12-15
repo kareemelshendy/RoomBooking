@@ -1,0 +1,35 @@
+@use "../variables" as *;
+.btn_primary {
+    width: 374px;
+    border-radius: 8px;
+    padding: 9px 0px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    &-white {
+        background-color: $white;
+        color: $secondary;
+        &:hover {
+            color: $secondary;
+        }
+    }
+    &-transparent {
+        border: 1px solid #fff;
+        color: $white;
+        &:hover {
+            color: $white;
+        }
+    }
+    &-blue {
+        color: $white !important;
+        background-color: $primary !important;
+        border: 2px solid transparent;
+        transition: transform 0.15s ease-in-out;
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+    // @media (max-width: 800px) {
+    //     padding: 9px 50px;
+    // }
+}

@@ -1,0 +1,107 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+.form_container {
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    @media (min-width: $device-md) {
+        margin-top: 0px;
+    }
+    .form {
+        width: 100%;
+        padding: 4px 17px;
+        display: flex;
+        justify-content: space-between;
+        background-color: $white;
+        flex-direction: column-reverse;
+        border-radius: 8px;
+        position: relative;
+        // position: absolute;
+        @media (min-width: $device-md) {
+            flex-direction: row;
+            padding: 0px 17px;
+            margin-top: -30px;
+            flex-direction: row;
+        }
+        .group {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px 0;
+            border-bottom: 1px solid $light;
+            // &:not(:first-child):not(:nth-child(2)) {}
+            &:first-child,
+            &:nth-child(2) {
+                border-bottom: 0;
+            }
+            position: relative;
+            .label {
+                margin-right: 14px;
+                label {
+                    margin-left: auto;
+                    margin-right: 8px;
+                }
+            }
+            @media (min-width: $device-md) {
+                width: 25%;
+                padding: 0px !important;
+                border-bottom: 0px;
+                &:not(:first-child):not(:last-child) {
+                    border-right: 1px solid $light !important;
+                }
+            }
+            .location {
+                // margin-right: 14px;
+                font-size: 14px;
+                line-height: 24px;
+                color: $light-grey;
+                margin-right: 15px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            .date {
+                display: flex;
+            }
+        }
+        .datePicker {
+            width: 85%;
+            border: none;
+            box-shadow: none !important;
+            direction: rtl;
+            color: $light-grey;
+            cursor: pointer;
+            &:focus {
+                outline-color: transparent;
+            }
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            // background-color: red;
+            @media (min-width: $device-md) {
+                width: 34px;
+            }
+            button {
+                background-color: primary;
+                // border-radius: 50%;
+                color: white;
+                border: none;
+                // width: 34px;
+                // height: 34px;
+                width: 100%;
+                padding: 10px 0px;
+                border-radius: 8px;
+                @media (min-width: $device-md) {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    padding: 0;
+                }
+            }
+            // position: absolute;
+            // inset: 11px 17px 0px 11px;
+        }
+    }
+}
