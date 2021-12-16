@@ -24,8 +24,12 @@
             width: 374px;
             @include align-center;
             flex-direction: column;
-            z-index: 4;
+            z-index: 1;
+            padding: 10px;
             // background-color: green;
+            @media (min-width: device-md) {
+                padding: 0px;
+            }
             &_logo {
                 margin-right: 1rem;
             }

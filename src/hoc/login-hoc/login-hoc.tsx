@@ -22,7 +22,7 @@ export const LoginHOC = () => {
   const loginHandler = (data: loginData) => {
     console.log(data)
     reset()
-    router.push("/home")
+    router.push("/")
   }
 
   return (

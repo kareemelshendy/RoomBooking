@@ -5,6 +5,7 @@
     position: relative;
     padding-bottom: 32px;
     .map_overlay {
+        overflow: hidden;
         position: absolute;
         left: 0;
         top: 0;
@@ -24,6 +25,11 @@
             padding: 0 10px;
             // background-color: red;
             @media (min-width: $device-md) {
+                top: 30%;
+                transform: translateY(-50%);
+                // padding: 0 px;
+            }
+            @media (min-width: $device-lg) {
                 top: 50%;
                 transform: translateY(-50%);
                 padding: 0px;

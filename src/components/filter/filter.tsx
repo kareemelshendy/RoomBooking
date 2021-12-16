@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker"
 import { Controller } from "react-hook-form"
 import "react-datepicker/dist/react-datepicker.css"
 
-export const Filter = ({ handleSubmit, filterHandler, register, toDate, setToDate, showToDate, setShowToDate, fromDate, setFromDate, showFromDate, setShowFromDate, setShow, control }: any) => {
+export const Filter = ({ handleSubmit, filterHandler, register, toDate, setToDate, fromDate, setFromDate, setShow, control }: any) => {
   return (
     <>
       <div className={`container ${styles.form_container}`}>
@@ -41,27 +41,27 @@ export const Filter = ({ handleSubmit, filterHandler, register, toDate, setToDat
               <Controller
                 name="toDate"
                 control={control}
-                defaultValue={new Date()}
+                defaultValue={toDate}
                 render={({ field }) => {
                   return (
                     <DatePicker
-                      onChange={(e) => {
-                        field.onChange(e)
-                        if (field.name == "toDate") {
-                          setToDate(e)
-                        }
-                        setShowToDate(false)
-                      }}
-                      maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
                       selected={field.value}
-                      // minDate={new Date()}
-                      minDate={new Date()}
+                      onChange={(date) => {
+                        field.onChange(date)
+                        setToDate(date)
+                      }}
+                      selectsEnd
+                      startDate={fromDate}
+                      endDate={toDate}
+                      minDate={fromDate}
+                      dateFormat="yyyy-MM-dd"
+                     
                       className={`${styles.datePicker} shadow`}
                     />
                   )
                 }}
               />
-              <h4 className={styles.location} onClick={() => setShowToDate(!showToDate)}>
+              <h4>
                 الي تاريخ{" "}
               </h4>
             </div>
@@ -78,26 +78,26 @@ export const Filter = ({ handleSubmit, filterHandler, register, toDate, setToDat
               <Controller
                 name="fromDate"
                 control={control}
-                defaultValue={new Date()}
+                defaultValue={fromDate}
                 render={({ field }) => {
                   return (
                     <DatePicker
+                    selected={field.value}
                       onChange={(e) => {
                         field.onChange(e)
-                        if (field.name == "fromDate") {
-                          setFromDate(e)
-                        }
-                        setShowFromDate(false)
+                        setFromDate(e)
                       }}
-                      minDate={new Date()}
-                      selected={field.value}
-                      maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
+                      selectsStart
+                      startDate={fromDate}
+                      endDate={toDate}
+                      minDate={fromDate}
+                      dateFormat="yyyy-MM-dd"
                       className={`${styles.datePicker} shadow`}
                     />
                   )
                 }}
               />
-              <h4 className={styles.location}>من تاريخ</h4>
+              <h4>من تاريخ</h4>
             </div>
           </div>
           <div

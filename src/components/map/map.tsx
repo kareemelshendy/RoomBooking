@@ -82,7 +82,7 @@ export const Map = ({ setShow }: any) => {
           </div>
 
           <button
-            className={styles.button}
+            className="btn btn-primary w-100 btn-p border-r"
             onClick={() => {
               setShow(false)
             }}

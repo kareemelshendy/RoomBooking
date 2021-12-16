@@ -9,16 +9,27 @@
 
 .react-datepicker {
     border: none !important;
-    width: 300px;
+    width: 255px;
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+    @media(min-width: $device-md) {
+        width: 300px;
+    }
     &__triangle::after {
         border-bottom-color: $white !important;
+        left: 48px !important;
+    }
+    &__triangle::before {
+        left: 48px !important;
     }
     &__navigation {
         top: 50% !important;
         transform: translateY(-50%);
-        width: 49px !important;
-        height: 49px !important;
+        width: 40px !important;
+        height: 40px !important;
+        @media (min-width: $device-md) {
+            width: 49px !important;
+            height: 49px !important;
+        }
         &--previous,
         &--next {
             background-color: $white !important;
@@ -28,7 +39,10 @@
             border-radius: 50% !important;
         }
         &--previous {
-            left: -23px !important;
+            left: -20px !important;
+            @media (min-width: $device-md) {
+                right: -23px !important;
+            }
         }
         &--next {
             right: -23px !important;
@@ -71,5 +85,8 @@
         font-weight: 400 !important;
         text-align: center !important;
         padding: 0 !important;
+    }
+    &__day--in-selecting-range {
+        border-radius: 50% !important;
     }
 }

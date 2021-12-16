@@ -12,8 +12,7 @@ type FormVlaues = {
 export const FilterHOC = ({ setShow }: any) => {
   const [fromDate, setFromDate] = useState(new Date())
   const [toDate, setToDate] = useState(new Date())
-  const [showFromDate, setShowFromDate] = useState(false)
-  const [showToDate, setShowToDate] = useState(false)
+
   const { register, handleSubmit, control, getValues, reset } = useForm<FormVlaues>()
 
   function filterHandler(data: FormVlaues) {
@@ -25,5 +24,5 @@ export const FilterHOC = ({ setShow }: any) => {
     })
   }
 
-  return <Filter register={register} handleSubmit={handleSubmit} filterHandler={filterHandler} control={control} showToDate={showToDate} setShowToDate={setShowToDate} toDate={toDate} setToDate={setToDate} showFromDate={showFromDate} setShowFromDate={setShowFromDate} fromDate={fromDate} setFromDate={setFromDate} getValues={getValues} setShow={setShow} />
+  return <Filter register={register} handleSubmit={handleSubmit} filterHandler={filterHandler} control={control} toDate={toDate} setToDate={setToDate} fromDate={fromDate} setFromDate={setFromDate} setShow={setShow} />
 }
