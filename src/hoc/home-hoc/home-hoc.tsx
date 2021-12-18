@@ -7,14 +7,23 @@ import { FilterHOC } from "../filter-hoc/filter-hoc"
 
 export const HomeHOC = ({ rooms }: any) => {
   const [show, setShow] = useState(false)
+  const [toggleFav, setToggleFav] = useState(false)
+  const [allRooms, setAllRooms] = useState(rooms)
+
+  function handleFav(room: any) {
+    const roomIndex = allRooms.indexOf(room)
+    allRooms[roomIndex].fav = !allRooms[roomIndex].fav
+    const newRooms = [...allRooms]
+    setAllRooms(newRooms)
+  }
   return (
     <>
-      <div className={styles.container}>
+      <div className={` ${styles.container}`}>
         {show && (
-          <div className={styles.map_overlay} onClick={()=>setShow(false)}>
+          <div className={styles.map_overlay}>
             <div className={styles.map_container}>
               <div className={`${styles.map} shadow`}>
-                <Map setShow={setShow} />
+                <Map setShow={setShow} button={true} />
               </div>
             </div>
           </div>
@@ -29,16 +38,16 @@ export const HomeHOC = ({ rooms }: any) => {
             </div>
           </div>
         </div>
-
         <FilterHOC setShow={setShow} />
-
-        <div className="container mr-t-4">
+        <div className="container mt-4 ">
           <div className="row">
             <div>
-              <h1 className="heading heading-3 heading-bold" dir="rtl" >غرفة قريبة منك !</h1>
+              <h1 className="heading heading-3 heading-bold" dir="rtl">
+                غرفة قريبة منك !
+              </h1>
             </div>
-            {rooms?.map((room: any) => {
-              return <Card key={room.id} room={room} />
+            {allRooms?.map((room: any) => {
+              return <Card key={room.id} room={room} toggleFav={toggleFav} setToggleFav={setToggleFav} handleFav={handleFav} />
             })}
           </div>
         </div>

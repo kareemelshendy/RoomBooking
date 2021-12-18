@@ -2,7 +2,6 @@
 .card {
     border-radius: 8px !important;
     position: relative;
-    z-index: -1;
     .heart {
         position: absolute !important;
         height: 20px;
@@ -12,11 +11,13 @@
         background-color: $white;
         top: 8px;
         left: 8px;
-        z-index: 2;
+        z-index: 5;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #d2d2d2;
+        border: none;
+        cursor: pointer;
         &_fav {
             color: $fav;
         }

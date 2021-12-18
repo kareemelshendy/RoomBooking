@@ -8,113 +8,114 @@ import "react-datepicker/dist/react-datepicker.css"
 export const Filter = ({ handleSubmit, filterHandler, register, toDate, setToDate, fromDate, setFromDate, setShow, control }: any) => {
   return (
     <>
-      <div className={`container ${styles.form_container}`}>
-        <form className={`form shadow-sm ${styles.form}`} onSubmit={handleSubmit(filterHandler)}>
-          <div className={styles.button}>
-            <button type="submit" className="btn btn-primary w-100">
-              <i className="fas fa-search"></i>
-            </button>
-          </div>
-          <div className={`${styles.group}`}>
-            <div className={styles.label}>
-              <label htmlFor="numberOfUsers">الأفراد</label>
-              <i className="fas fa-user"></i>
-            </div>
-            <Form.Select aria-label="Default select" dir="rtl" {...register("numberOfUsers")}>
-              <option value="">عدد الآفراد</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </Form.Select>
-          </div>
-          <div className={` ${styles.group}`}>
-            <div className={styles.label}>
-              <label htmlFor="fromDate">التاريخ</label>
-              <i className="far fa-calendar"></i>
-            </div>
-            <div className={styles.date}>
-              <Controller
-                name="toDate"
-                control={control}
-                defaultValue={toDate}
-                render={({ field }) => {
-                  return (
-                    <DatePicker
-                      selected={field.value}
-                      onChange={(date) => {
-                        field.onChange(date)
-                        setToDate(date)
-                      }}
-                      selectsEnd
-                      startDate={fromDate}
-                      endDate={toDate}
-                      minDate={fromDate}
-                      dateFormat="yyyy-MM-dd"
-                     
-                      className={`${styles.datePicker} shadow`}
-                    />
-                  )
+      <div className={`container `}>
+        <div className="row">
+          <div className={styles.form_container}>
+            <form className={`form shadow-sm ${styles.form}`} onSubmit={handleSubmit(filterHandler)}>
+              <div className={styles.button}>
+                <button type="submit" className="btn btn-primary w-100">
+                  <i className="fas fa-search"></i>
+                </button>
+              </div>
+              <div className={`${styles.group}`}>
+                <div className={styles.label}>
+                  <label htmlFor="numberOfUsers">الأفراد</label>
+                  <i className="fas fa-user"></i>
+                </div>
+                <Form.Select aria-label="Default select" dir="rtl" {...register("numberOfUsers")}>
+                  <option value="">عدد الآفراد</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </Form.Select>
+              </div>
+              <div className={` ${styles.group}`}>
+                <div className={styles.label}>
+                  <label htmlFor="fromDate">التاريخ</label>
+                  <i className="far fa-calendar"></i>
+                </div>
+                <div className={styles.date}>
+                  <Controller
+                    name="toDate"
+                    control={control}
+                    defaultValue={toDate}
+                    render={({ field }) => {
+                      return (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(date) => {
+                            field.onChange(date)
+                            setToDate(date)
+                          }}
+                          selectsEnd
+                          startDate={fromDate}
+                          endDate={toDate}
+                          minDate={fromDate}
+                          dateFormat="yyyy-MM-dd"
+                          className={`${styles.datePicker} shadow`}
+                        />
+                      )
+                    }}
+                  />
+                  <h4>الي تاريخ </h4>
+                </div>
+              </div>
+
+              <div className={` ${styles.group} ${styles.datePicker_container}`}>
+                <div className={styles.label}>
+                  <label htmlFor="fromDate">التاريخ</label>
+
+                  <i className="far fa-calendar"></i>
+                </div>
+
+                <div className={styles.date}>
+                  <Controller
+                    name="fromDate"
+                    control={control}
+                    defaultValue={fromDate}
+                    render={({ field }) => {
+                      return (
+                        <DatePicker
+                          selected={field.value}
+                          onChange={(e) => {
+                            field.onChange(e)
+                            setFromDate(e)
+                          }}
+                          selectsStart
+                          startDate={fromDate}
+                          endDate={toDate}
+                          minDate={fromDate}
+                          dateFormat="yyyy-MM-dd"
+                          className={`${styles.datePicker} shadow`}
+                        />
+                      )
+                    }}
+                  />
+                  <h4>من تاريخ</h4>
+                </div>
+              </div>
+              <div
+                className={styles.group}
+                onClick={() => {
+                  setShow(true)
                 }}
-              />
-              <h4>
-                الي تاريخ{" "}
-              </h4>
-            </div>
+              >
+                <div className={styles.label}>
+                  <label htmlFor="numberOfUsers">الموقع</label>
+                  <i className="fas fa-map-marker-alt"></i>
+                </div>
+                <h4 className={styles.location} onSubmit={handleSubmit(filterHandler)}>
+                  إبحث عن المكان
+                </h4>
+              </div>
+            </form>
           </div>
-
-          <div className={` ${styles.group} ${styles.datePicker_container}`}>
-            <div className={styles.label}>
-              <label htmlFor="fromDate">التاريخ</label>
-
-              <i className="far fa-calendar"></i>
-            </div>
-
-            <div className={styles.date}>
-              <Controller
-                name="fromDate"
-                control={control}
-                defaultValue={fromDate}
-                render={({ field }) => {
-                  return (
-                    <DatePicker
-                    selected={field.value}
-                      onChange={(e) => {
-                        field.onChange(e)
-                        setFromDate(e)
-                      }}
-                      selectsStart
-                      startDate={fromDate}
-                      endDate={toDate}
-                      minDate={fromDate}
-                      dateFormat="yyyy-MM-dd"
-                      className={`${styles.datePicker} shadow`}
-                    />
-                  )
-                }}
-              />
-              <h4>من تاريخ</h4>
-            </div>
-          </div>
-          <div
-            className={styles.group}
-            onClick={() => {
-              setShow(true)
-            }}
-          >
-            <div className={styles.label}>
-              <label htmlFor="numberOfUsers">الموقع</label>
-              <i className="fas fa-map-marker-alt"></i>
-            </div>
-            <h4 className={styles.location} onSubmit={handleSubmit(filterHandler)}>
-              إبحث عن المكان
-            </h4>
-          </div>
-        </form>
+        </div>
 
         {/* <DatePicker selected={fromDate} onChange={(date) => setFromDate(date)} /> */}
       </div>

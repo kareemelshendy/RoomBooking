@@ -9,8 +9,8 @@ const Header = () => {
     <header className="sticky-top">
       <Navbar bg="white" expand="md" sticky="top" className="navbar">
         <Container className="flex-row-reverse">
-          <Link href="/home">
-            <Navbar.Brand href="#home">
+          <Link href="/">
+            <Navbar.Brand>
               <Image src="/Shape-header.png" width="51px" height="47px" objectFit="cover" alt="الصورة الشخصية" />
             </Navbar.Brand>
           </Link>

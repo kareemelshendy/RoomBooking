@@ -14,7 +14,7 @@ export const PasswordInput = ({ register, errors }: any) => {
 
         <div className={styles.passwordIcon}>
           <i
-            className={`fas fa-eye`}
+            className={`${show ? "fas fa-eye-slash":"fas fa-eye"}`}
             onClick={() => {
               setShow(!show)
             }}

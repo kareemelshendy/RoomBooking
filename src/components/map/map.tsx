@@ -4,7 +4,7 @@ import { formatRelative } from "date-fns"
 import { SearchMap } from "../mapSearch/mapSearch"
 import styles from "./map.module.scss"
 
-export const Map = ({ setShow }: any) => {
+export const Map = ({ setShow, search, button }: any) => {
   const [markers, setMarkers] = useState<any[]>([])
   const [selected, setSelected] = useState<any>(null)
   const mapRef = useRef()
@@ -74,22 +74,23 @@ export const Map = ({ setShow }: any) => {
             </div>
           </InfoWindow>
         ) : null}
+        {button && (
+          <div className={styles.bottom}>
+            <div className={styles.location}>
+              <h2 className="heading heading-4 heading-darkGrey">العين السخنة كمباوند أروما الكيلو 39</h2>
+              <i className="fas fa-map-marker-alt"></i>
+            </div>
 
-        <div className={styles.bottom}>
-          <div className={styles.location}>
-            <h2 className="heading heading-4 heading-darkGrey">العين السخنة كمباوند أروما الكيلو 39</h2>
-            <i className="fas fa-map-marker-alt"></i>
+            <button
+              className="btn btn-primary w-50 btn-p border-r"
+              onClick={() => {
+                setShow(false)
+              }}
+            >
+              تأكيد
+            </button>
           </div>
-
-          <button
-            className="btn btn-primary w-100 btn-p border-r"
-            onClick={() => {
-              setShow(false)
-            }}
-          >
-            تأكيد
-          </button>
-        </div>
+        )}
       </GoogleMap>
     </>
   )

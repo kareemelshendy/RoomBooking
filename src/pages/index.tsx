@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       location: "العين السخنة كمباوند أروما الكيلو 39",
       price: "400",
       numberOfUsers: "4",
-      fav: true,
+      fav: false,
       image: "/bedroom.jpg",
     },
     {

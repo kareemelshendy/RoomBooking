@@ -15,6 +15,5 @@
 @forward "components/filter";
 @forward "screens/auth-page";
 @forward 'components/datePicker';
-// $primary: #f00;
-// $danger: #ff4136;
-@forward "~bootstrap/scss/bootstrap" with( $theme-colors: ( "primary": $primary, "secondary": $secondary, "light": $white));
+$spacer: 1rem;
+@forward "~bootstrap/scss/bootstrap" with( $theme-colors: ( "primary": $primary, "secondary": $secondary, "light": $white, 'darkGrey':$dark-grey), $spacers: ( 0: 0, 1: $spacer, 2: $spacer * 1.5, 3: $spacer *2, 4: $spacer * 2.5, 5: $spacer * 4, ));
