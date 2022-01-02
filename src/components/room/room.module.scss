@@ -1,161 +1,6 @@
 @use "../../styles/variables" as *;
-.swiperImage {
-    width: 100%;
-    height: 349px;
-    border-radius: 8px;
-    img {
-        border-radius: 8px;
-        object-fit: cover;
-        // object-position: center;
-    }
-}
-
-.room {
-    display: flex;
-    flex-direction: column;
-    padding: 24px 32px;
-    width: 100%;
-    border-radius: 8px;
-    .roomTop {
-        width: 100%;
-        text-align: right;
-        border-bottom: 1px solid #d2d2d2;
-        h4 {
-            direction: rtl;
-            line-height: 34px;
-            margin-bottom: 16px;
-        }
-        .titleContent {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            @media (min-width: $device-md) {
-                flex-direction: row;
-            }
-            .buttons {
-                width: 100%;
-                // background-color: red;
-                display: flex;
-                justify-content: space-between;
-                margin-top: 20px;
-                @media (min-width: $device-sm) {
-                    i {
-                        margin-left: 8px;
-                    }
-                }
-                @media (min-width: $device-md) {
-                    width: 60%;
-                    margin-top: 0;
-                }
-                @media (min-width: $device-lg) {
-                    width: 45%;
-                }
-            }
-            .priceAndUser {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                @media (min-width: $device-md) {
-                    width: 60%;
-                    margin-top: 0;
-                }
-                @media (min-width: $device-lg) {
-                    width: 45%;
-                }
-                .price {
-                    h4 {
-                        margin-bottom: 0px;
-                        font-weight: 700;
-                        font-size: 24px;
-                        color: $gold;
-                        text-align: right;
-                        direction: ltr;
-                    }
-                }
-                .users {
-                    padding: 0px 8px;
-                    border-radius: 8px;
-                    background-color: $gold;
-                    color: $white;
-                    display: flex;
-                    align-items: center;
-                    margin-right: 14px;
-                    h4 {
-                        font-size: 16px;
-                        margin: 0 0 0 4px;
-                        font-weight: 700;
-                    }
-                }
-            }
-        }
-    }
-    .details {
-        border-bottom: 1px solid #d2d2d2;
-        h5 {
-            font-size: 18px;
-        }
-        p {
-            margin-top: 12px;
-            font-size: 18px;
-            line-height: 30px;
-            color: $dark-grey;
-        }
-    }
-    .services {
-        border-bottom: 1px solid #d2d2d2;
-        h5 {
-            font-size: 18px;
-        }
-        .services_content {
-            display: flex;
-            // flex-direction: column;
-            // align-items: flex-start;
-            @media (min-width: $device-sm) {
-                flex-direction: row;
-            }
-            div {
-                // width: 100%;
-                color: $white;
-                display: flex;
-                align-items: center;
-                background-color: $gold;
-                padding: 4px 8px;
-                border-radius: 8px;
-                margin-bottom: 16px;
-                margin-top: 12px;
-                p {
-                    margin: 0;
-                    font-size: 14px;
-                    line-height: 25px;
-                    margin-right: 2px;
-                    @media (min-width: $device-sm) {
-                        margin-right: 8px;
-                    }
-                }
-                &:not(:last-child) {
-                    margin-left: 8px;
-                }
-            }
-        }
-    }
-    .location {
-        position: relative;
-        width: 100%;
-        height: 308px;
-        h5 {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        .map {
-            width: 100%;
-            height: 266px;
-        }
-    }
-}
-
+@use "../../styles/mixins" as *;
+@use "../../styles/functions" as *;
 .owner {
     display: flex;
     flex-direction: column;
@@ -183,14 +28,6 @@
         @media (min-width: $device-lg) {
             width: 100%;
         }
-        .img {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            img {
-                border-radius: 50%;
-            }
-        }
     }
     &_bottom {
         width: 100%;
@@ -207,10 +44,21 @@
         }
         p {
             // margin: 0px;
-            font-size: 16px;
+            font-size: toRem(16);
             line-height: 24px;
             font-weight: 600;
             color: $dark-grey;
         }
+    }
+}
+
+.room {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 8px;
+    padding: 16px 16px;
+    @media (min-width: $device-md) {
+        padding: 24px 32px;
     }
 }

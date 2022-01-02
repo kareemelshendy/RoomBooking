@@ -1,4 +1,5 @@
-@use './variables' as *;
+@use "./variables" as *;
+@use "./functions" as *;
 .heading {
     line-height: 32px;
     font-family: "Cairo";
@@ -6,22 +7,25 @@
     padding: 0px;
     // direction: rtl;
     &-1 {
-        font-size: 20px;
-        @media (min-width: 576px) {
-            font-size: 28px;
+        font-size: toRem(20);
+        @media (min-width: $device-md) {
+            font-size: toRem(28);
         }
     }
     &-2 {
-        font-size: 24px;
+        font-size: toRem(24);
     }
     &-3 {
-        font-size: 20px;
+        font-size: toRem(16);
+        @media (min-width: $device-md) {
+            font-size: toRem(20);
+        }
     }
     &-4 {
-        font-size: 16px;
+        font-size: toRem(16);
     }
     &-5 {
-        font-size: 14px;
+        font-size: toRem(14);
     }
     &-normal {
         font-weight: 400;
@@ -48,7 +52,7 @@
         color: $light-grey !important;
     }
     &-darkGrey {
-        color: $dark-grey !important
+        color: $dark-grey !important;
     }
 }
 
@@ -60,11 +64,44 @@
     border-radius: 8px !important;
 }
 
-.pargraph {
+.p-9 {
+    padding: 9px 0px !important;
+}
+
+.p {
     &-small {
-        font-size: 12px;
+        font-size: toRem(12);
     }
     &-md {
-        font-size: 14px;
+        font-size: toRem(14);
     }
+}
+
+.px-32 {
+    padding: 0 16px !important;
+    @media (min-width: $device-md) {
+        padding: 0 32px !important;
+    }
+}
+
+.py-24 {
+    padding: 16px 0 !important;
+    @media (min-width: $device-md) {
+        padding: 24px 0 !important;
+    }
+}
+
+.p-32 {
+    padding: 16px;
+    @media (min-width: $device-md) {
+        padding: 32px;
+    }
+}
+
+.py-9 {
+    padding: 9px 0px !important;
+}
+
+.shadow_sm {
+    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.1) !important;
 }

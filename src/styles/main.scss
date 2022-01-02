@@ -9,11 +9,15 @@
 @forward "globals";
 @forward "utils";
 @forward "mixins";
+@forward 'functions';
 @forward "components/buttons";
 @forward "components/navbar";
 @forward "components/inputs";
 @forward "components/filter";
 @forward "screens/auth-page";
 @forward 'components/datePicker';
+@forward 'components/swiper';
+@forward 'components/react-select';
+@forward 'components/modals';
 $spacer: 1rem;
-@forward "~bootstrap/scss/bootstrap" with( $theme-colors: ( "primary": $primary, "secondary": $secondary, "light": $white, 'darkGrey':$dark-grey), $spacers: ( 0: 0, 1: $spacer, 2: $spacer * 1.5, 3: $spacer *2, 4: $spacer * 2.5, 5: $spacer * 4, ));
+@forward "~bootstrap/scss/bootstrap" with( $theme-colors: ( "primary": $primary, "secondary": $secondary, "light": $white, 'darkGrey':$dark-grey, 'danger':$fav), $spacers: ( 0: 0, 1: $spacer, 2: $spacer * 1.5, 3: $spacer *2, 4: $spacer * 2.5, 5: $spacer * 4, 6:$spacer*.5));

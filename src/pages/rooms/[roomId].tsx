@@ -13,7 +13,7 @@ const RoomPage = () => {
   // console.log(router.query)
   return (
     <>
-      <Layout>
+      <Layout title="rooms">
         <RoomHOC />
       </Layout>
     </>

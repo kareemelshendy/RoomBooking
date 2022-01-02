@@ -1,0 +1,7 @@
+@use '../../styles/variables' as *;
+.cont {
+    width: 100%;
+    @media (min-width: $device-sm) {
+        margin-top: -32px;
+    }
+}

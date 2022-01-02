@@ -1,9 +1,10 @@
 @use "../variables" as *;
+@use "../functions" as *;
 .btn_primary {
     width: 374px;
     border-radius: 8px;
     padding: 9px 0px;
-    font-size: 16px;
+    font-size: toRem(16);
     line-height: 30px;
     text-align: center;
     &-white {

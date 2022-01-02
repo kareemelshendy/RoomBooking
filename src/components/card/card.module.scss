@@ -15,7 +15,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #d2d2d2;
+        color: $light;
         border: none;
         cursor: pointer;
         &_fav {
@@ -39,7 +39,6 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            margin-top: 12px;
             color: $dark-grey;
         }
         .price,
@@ -55,7 +54,7 @@
         .price {
             top: -15px;
             right: 8px;
-            h4 {
+            h5 {
                 margin-bottom: 0px;
                 font-weight: 700;
                 font-size: 14px;
@@ -67,11 +66,15 @@
             right: 74px;
             padding: 8px 8px;
             color: $gold;
-            h4 {
+            h5 {
                 font-size: 12px;
                 margin: 0 4px 0 0;
                 font-weight: 700;
             }
+        }
+        .title {
+            line-height: 24px;
+            margin-bottom: 12px !important;
         }
         .card_text {
             font-size: 12px;

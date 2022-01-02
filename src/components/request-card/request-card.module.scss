@@ -1,0 +1,73 @@
+@use "../../styles/functions" as *;
+@use "../../styles/variables" as *;
+.card {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    padding: 16px;
+    margin-bottom: 16px;
+    @media (min-width: $device-md) {
+        flex-direction: row;
+    }
+    &_image {
+        width: 152px;
+        width: 152px;
+        border-radius: 8px;
+        position: relative;
+        img {
+            border-radius: 8px;
+        }
+        margin-left: 16px;
+    }
+    &_content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @media (min-width: $device-md) {
+            width: 664px;
+        }
+        h3 {
+            margin: 16px 0px;
+        }
+        p {
+            font-size: toRem(12);
+            line-height: 20px;
+            color: $dark-grey;
+            i {
+                margin-left: 4px;
+                font-size: toRem(14);
+            }
+        }
+    }
+    &_bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        @media (min-width: $device-sm) {
+            flex-direction: row;
+        }
+        .card_date {
+            display: flex;
+            p {
+                margin-bottom: 0px;
+            }
+            span {
+                font-weight: 700;
+                font-size: toRem(12);
+                line-height: 20px;
+                color: $secondary;
+                margin: 0 4px;
+            }
+        }
+        .card_price {
+            font-size: toRem(20);
+            font-weight: 700;
+            color: $gold;
+            direction: ltr;
+            line-height: 29px;
+            margin-bottom: 0px;
+        }
+    }
+}

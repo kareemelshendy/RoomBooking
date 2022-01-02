@@ -4,13 +4,10 @@ import { HomeHOC } from "../hoc/home-hoc/home-hoc"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import { Room } from "../models"
 
-const Home = ({ rooms }: { rooms: Room }) => {
+const Home = ({ rooms }: { rooms: Room[] }) => {
   return (
     <>
-      <Head>
-        <title>الصفحة الرئيسية</title>
-      </Head>
-      <Layout>
+      <Layout title="الصفحة الرئيسية">
         <HomeHOC rooms={rooms} />
       </Layout>
     </>

@@ -3,8 +3,9 @@ import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps
 import { formatRelative } from "date-fns"
 import { SearchMap } from "../mapSearch/mapSearch"
 import styles from "./map.module.scss"
+import { Button } from "../button/button"
 
-export const Map = ({ setShow, search, button }: any) => {
+export const Map = ({ setShow, search, button, borderRadius}: any) => {
   const [markers, setMarkers] = useState<any[]>([])
   const [selected, setSelected] = useState<any>(null)
   const mapRef = useRef()
@@ -36,6 +37,10 @@ export const Map = ({ setShow, search, button }: any) => {
   if (loadError) return <div>Error loading maps</div>
   if (!isLoaded) return <div>Loading Maps</div>
 
+  function confirmHandler() {
+    setShow(false)
+  }
+
   return (
     <>
       <GoogleMap
@@ -46,7 +51,7 @@ export const Map = ({ setShow, search, button }: any) => {
           onMapClick(event)
         }}
         onLoad={onMapLoad}
-        mapContainerClassName={styles.map}
+        mapContainerClassName={`${styles.map} ${borderRadius}`}
       >
         <button className={styles.search} type="submit">
           <i className="fas fa-search"></i>
@@ -81,14 +86,9 @@ export const Map = ({ setShow, search, button }: any) => {
               <i className="fas fa-map-marker-alt"></i>
             </div>
 
-            <button
-              className="btn btn-primary w-50 btn-p border-r"
-              onClick={() => {
-                setShow(false)
-              }}
-            >
+            <Button padding="btn-p" bgColor="btn-primary" width="w-50" onClick={confirmHandler}>
               تأكيد
-            </button>
+            </Button>
           </div>
         )}
       </GoogleMap>

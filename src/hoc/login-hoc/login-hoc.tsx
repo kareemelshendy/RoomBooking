@@ -1,9 +1,8 @@
-import React from "react"
-import Image from "next/image"
-import styles from "./login-hoc.module.scss"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { LoginForm } from "../../components/login-form/login-form"
+
 import { useRouter } from "next/router"
+import { LoginComponent } from "../../components/login/login"
 
 interface loginData {
   phoneNumber: "string"
@@ -11,6 +10,7 @@ interface loginData {
 }
 
 export const LoginHOC = () => {
+  const [valid, setValid] = useState(false)
   const router = useRouter()
   const {
     register,
@@ -25,29 +25,5 @@ export const LoginHOC = () => {
     router.push("/")
   }
 
-  return (
-    <>
-      <div className={styles.login_container}>
-        <div className={styles.left}>
-          <div className={styles.login_logo}>
-            <Image src="/Shapeblue.png" width="66px" height="60px" />
-            <div className={styles.logotitle}>
-              <h1 className="heading heading-3 heading-semiBold heading-blue">Room Smart</h1>
-              <h3 className="heading heading-4  heading-lightGrey">Booking Room</h3>
-            </div>
-          </div>
-          <div className={styles.formContainer}>
-            <div className={styles.loginForm}>
-              <h2 className="heading heading-2 heading-bold heading-secondary">سجل الدخول الآن</h2>
-              <h4 className="heading heading-4 heading-semiBlod heading-lightGrey mt-1">!سجل الدخول .. هناك حجوزات بإنتظارك</h4>
-              <LoginForm register={register} handleSubmit={handleSubmit} loginHandler={loginHandler} errors={errors} />
-            </div>
-          </div>
-        </div>
-        <div className={styles.right}>
-          <div className={styles.overlay}></div>
-        </div>
-      </div>
-    </>
-  )
+  return <LoginComponent register={register} handleSubmit={handleSubmit} loginHandler={loginHandler} errors={errors} valid={valid} setValid={setValid} />
 }

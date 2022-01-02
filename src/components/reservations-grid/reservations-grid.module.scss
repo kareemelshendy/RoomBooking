@@ -1,0 +1,19 @@
+@use "../../styles/variables" as *;
+@use "../../styles//functions" as *;
+.col {
+    padding: 0px;
+}
+
+.room_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 21px;
+    grid-row-gap: 21px;
+    @media (min-width: $device-sm) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: $device-md) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

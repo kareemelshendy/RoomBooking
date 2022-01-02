@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>مرحباً بك</title>
+        <title>مرحبا بك</title>
       </Head>
       <div className="home_container">
         <div className="overlay">
@@ -29,10 +29,22 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="buttonsContainer mt-3">
-              <Button title="تسجيل الدخول" toLogin={toLogin} width="w-100" bgColor="btn-light" />
-              <Button title="إنشاء الحساب" width="w-100"
-              textColor='text-white' mt='mt-3' border="border-1" borderColor="border-light"
-              toCreateAccount={toCreateAccount} />
+              <Button onClick={toLogin} width="w-100" bgColor="btn-light" padding="btn-p">
+                تسجيل الدخول
+              </Button>
+              <Button
+                width="w-100"
+                textColor="text-white"
+                mt="mt-3"
+                border="border-1"
+                borderColor="border-light"
+                onClick={() => {
+                  router.push("/create-account")
+                }}
+                padding="btn-p"
+              >
+                إنشاء الحساب
+              </Button>
 
               {/* <button
                 className="btn  border-light w-100 border-r text-white btn-p mt-3"

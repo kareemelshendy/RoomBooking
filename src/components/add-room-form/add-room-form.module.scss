@@ -1,0 +1,113 @@
+@use "../../styles/functions" as *;
+@use "../../styles/variables" as *;
+.create_form {
+    .input_cont {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 32px;
+        @media (min-width: $device-md) {
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        .right {
+            width: 100%;
+            margin-bottom: 16px;
+            @media (min-width: $device-md) {
+                margin-bottom: 0px;
+                width: 39%;
+            }
+        }
+        .group {
+            position: relative;
+            p {
+                position: absolute;
+                top: 55%;
+                left: 10px;
+                font-size: toRem(14);
+                line-height: 24px;
+                color: $light-grey;
+            }
+        }
+        .label,
+        .label_left {
+            font-size: toRem(14);
+            color: $secondary;
+            line-height: 24px;
+            span {
+                color: $fav;
+                margin-right: 2px;
+            }
+        }
+        .label {
+            margin-bottom: 6px;
+        }
+        .label_left {
+            margin-bottom: 12px;
+        }
+        .input {
+            border-radius: 8px;
+            font-size: toRem(14);
+            padding: 12.5px 8.5px;
+        }
+        .textarea {
+            height: 166px;
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: toRem(14);
+        }
+        .left {
+            // width: 48%;
+            width: 100%;
+            @media (min-width: $device-md) {
+                width: 48%;
+            }
+            .services {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .map {
+                width: 100%;
+                height: 185px;
+            }
+        }
+        .image_cont {
+            display: flex;
+            flex-direction: column;
+            .addImage {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                button {
+                    font-size: toRem(16);
+                    i {
+                        font-weight: 400;
+                    }
+                }
+            }
+            .image_message {
+                font-weight: 700;
+                color: $fav
+            }
+            .image_box {
+                display: flex;
+                flex-wrap: wrap;
+                @media (min-width: $device-lg) {
+                    flex-wrap: nowrap;
+                }
+            }
+        }
+    }
+    .submit_button {
+        margin: 0 auto;
+        width: 176px;
+    }
+    .error {
+        color: $fav;
+        font-size: toRem(12);
+        position: absolute;
+        // bottom: 0;
+    }
+}

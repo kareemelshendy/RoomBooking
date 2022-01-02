@@ -2,6 +2,8 @@ import { Filter } from "../../components/filter/filter"
 import { useState } from "react"
 import { useForm, useFormState } from "react-hook-form"
 import dayjs from "dayjs"
+import styels from "./filter-hoc.module.scss"
+import { useRouter } from "next/router"
 
 type FormVlaues = {
   numberOfUsers: string
@@ -10,9 +12,7 @@ type FormVlaues = {
 }
 
 export const FilterHOC = ({ setShow }: any) => {
-  const [fromDate, setFromDate] = useState(new Date())
-  const [toDate, setToDate] = useState(new Date())
-
+  const router = useRouter()
   const { register, handleSubmit, control, getValues, reset } = useForm<FormVlaues>()
 
   function filterHandler(data: FormVlaues) {
@@ -22,7 +22,20 @@ export const FilterHOC = ({ setShow }: any) => {
       fromDate: +dayjs(data.fromDate).startOf("day"),
       toDate: +dayjs(data.toDate).endOf("day"),
     })
+    // reset()
+
+setTimeout(() => {
+  router.push('/search-results')
+}, 2000);
   }
 
-  return <Filter register={register} handleSubmit={handleSubmit} filterHandler={filterHandler} control={control} toDate={toDate} setToDate={setToDate} fromDate={fromDate} setFromDate={setFromDate} setShow={setShow} />
+  return (
+    <div className="container">
+      <div className="row">
+        <div className={styels.cont}>
+          <Filter register={register} handleSubmit={handleSubmit} filterHandler={filterHandler} control={control} setShow={setShow} />
+        </div>
+      </div>
+    </div>
+  )
 }

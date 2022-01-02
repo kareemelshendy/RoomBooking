@@ -1,6 +1,7 @@
 @use "../variables" as *;
+@use "../functions" as *;
 .react-datepicker-wrapper {
-    width: 65% !important;
+    width: 100% !important;
     .react-datepicker__input-container {
         display: flex !important;
         justify-content: flex-end !important;
@@ -10,8 +11,9 @@
 .react-datepicker {
     border: none !important;
     width: 255px;
+    direction: ltr;
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
-    @media(min-width: $device-md) {
+    @media (min-width: $device-md) {
         width: 300px;
     }
     &__triangle::after {
@@ -69,19 +71,19 @@
     }
     &__current-month {
         color: $light-grey !important;
-        font-size: 16px;
+        font-size: toRem(16) !important;
         font-family: "Cairo" !important;
         font-weight: 400 !important;
     }
     &__day-name {
-        font-size: 12px;
+        font-size: toRem(12);
         font-weight: bold;
         color: $light-grey !important;
     }
     &__day--selected {
         border-radius: 50% !important;
         background-color: $primary !important;
-        font-size: 14px !important;
+        font-size: toRem(14) !important;
         font-weight: 400 !important;
         text-align: center !important;
         padding: 0 !important;

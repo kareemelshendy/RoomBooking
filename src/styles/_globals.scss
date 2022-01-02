@@ -1,4 +1,5 @@
 @use "./variables" as *;
+@use "./functions" as *;
 html,
 body {
     padding: 0 !important;
@@ -19,11 +20,13 @@ body {
 
 a {
     text-decoration: none !important;
-    // color: $dark !important;
+    &:active {
+        color: $dark !important;
+    }
 }
 
 ::placeholder {
-    color: #d2d2d2 !important;
+    color: $light !important;
 }
 
 .error {
@@ -49,47 +52,33 @@ a {
     z-index: 10;
 }
 
+.card-title {
+    margin-bottom: 12px !important;
+}
+
 .search input {
     padding: 0.5rem;
     font-size: 1.5rem;
     width: 100%;
 }
 
-.swiper {
-    width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    &-button-next,
-    &-button-prev {
-        color: #fff !important;
-        width: 50px;
-        height: 50px;
+.sticky-top {
+    z-index: 1000 !important;
+}
+
+.active {
+    border-right: 1px solid $primary !important;
+    // background-color: #f0f6ff;
+    background-color: #fbfbfb !important;
+    a {
+        color: $primary !important;
     }
 }
 
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
-
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.error_span {
+    color: $fav;
+    font-size: toRem(12);
+    position: absolute;
+    // bottom: -20px;
+    margin-right: 8px;
 }
