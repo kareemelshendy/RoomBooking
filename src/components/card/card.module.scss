@@ -1,6 +1,7 @@
 @use "../../styles/variables" as *;
-.card {
-    border-radius: 8px !important;
+.card_container {
+    width: 100%;
+    height: 100%;
     position: relative;
     .heart {
         position: absolute !important;
@@ -22,10 +23,41 @@
             color: $fav;
         }
     }
-    .card_img {
-        height: 169px !important;
-        border-radius: 4px 4px 0px 0px !important;
+}
+
+.card {
+    border-radius: 8px !important;
+    position: relative;
+    height: 292px;
+    .card_top {
+        width: 100%;
+        height: 169px;
+        // background-color: red;
+        position: relative;
+        .card_img {
+            height: 169px !important;
+            width: 100%;
+            border-radius: 4px 4px 0px 0px !important;
+            img {
+                border-radius: 4px 4px 0px 0px !important;
+            }
+        }
     }
+    .card_blurhash {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px 4px 0px 0px !important;
+        canvas {
+            border-radius: 4px 4px 0px 0px !important;
+        }
+    }
+    // .imageReady {
+    //     opacity: 1 !important;
+    //     transition: opacity 2s ease-in-out;
+    // }
+    // .imageNotReady {
+    //     opacity: 0 !important;
+    // }
     .card_body {
         padding: 32px 8px 16px 8px !important;
         text-align: right;
@@ -41,40 +73,50 @@
             align-items: center;
             color: $dark-grey;
         }
-        .price,
-        .users {
-            padding: 8px 8px;
-            position: absolute;
-            background-color: $white;
-            border-radius: 8px;
+        .info {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .price {
-            top: -15px;
-            right: 8px;
-            h5 {
-                margin-bottom: 0px;
-                font-weight: 700;
-                font-size: 14px;
-                color: $gold;
+            margin-top: -50px;
+            justify-content: flex-end;
+            .price,
+            .users {
+                padding: 8px 8px;
+                // position: absolute;
+                background-color: $white;
+                // background-color: slategray;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-        }
-        .users {
-            top: -15px;
-            right: 74px;
-            padding: 8px 8px;
-            color: $gold;
-            h5 {
-                font-size: 12px;
-                margin: 0 4px 0 0;
-                font-weight: 700;
+            .price {
+                // top: -15px;
+                // right: 8px;
+                min-width: 61px;
+                h5 {
+                    margin-bottom: 0px;
+                    font-weight: 700;
+                    font-size: 14px;
+                    color: $gold;
+                }
+            }
+            .users {
+                // top: -15px;
+                // right: 74px;
+                width: 43px;
+                margin-right: 4px;
+                padding: 8px 8px;
+                color: $gold;
+                h5 {
+                    font-size: 12px;
+                    margin: 0 4px 0 0;
+                    font-weight: 700;
+                }
             }
         }
         .title {
             line-height: 24px;
             margin-bottom: 12px !important;
+            margin-top: 12px;
         }
         .card_text {
             font-size: 12px;

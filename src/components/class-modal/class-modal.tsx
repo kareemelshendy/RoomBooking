@@ -1,11 +1,41 @@
-import { Modal } from "react-bootstrap"
-import { Controller } from "react-hook-form"
-import { Button } from "../button/button"
-import DatePicker from "react-datepicker"
-import { Map } from "../map/map"
-import { CheckBoxInput } from "../checkboxInput/checkbox-input"
+import { Modal } from "react-bootstrap";
+import { Control, Controller, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { Button } from "../button/button";
+import DatePicker from "react-datepicker";
+import { Map } from "../map/map";
+import { CheckBoxInput } from "../checkboxInput/checkbox-input";
+import { Service } from "../../models";
+import { Dispatch, SetStateAction } from "react";
 
-export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit, control, register, toDate, fromDate, setFromDate, setToDate, numberOfUsers, incrementCount, decrementCount }: any) => {
+interface Props {
+  showClass: boolean;
+  setShowClass: Dispatch<SetStateAction<boolean>>;
+  handleButton(data: any): void;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  control: Control<FieldValues, object>;
+  register: UseFormRegister<FieldValues>;
+  toDate: Date;
+  setToDate: Dispatch<SetStateAction<Date>>;
+  fromDate: Date;
+  setFromDate: Dispatch<SetStateAction<Date>>;
+  numberOfUsers: number;
+  setValue: UseFormSetValue<FieldValues>;
+  incrementCount: () => void;
+  decrementCount: () => void;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  services: Service[] | undefined;
+  setLocation: Dispatch<
+    SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+}
+
+export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit, control, register, toDate, fromDate, setFromDate, setToDate, numberOfUsers, incrementCount, decrementCount, services, location, setLocation }: Props) => {
   return (
     <Modal show={showClass} onHide={() => setShowClass(false)} dir="rtl">
       <form onSubmit={handleSubmit(handleButton)}>
@@ -47,8 +77,8 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                         <DatePicker
                           selected={field.value}
                           onChange={(e: Date) => {
-                            field.onChange(e)
-                            setFromDate(e)
+                            field.onChange(e);
+                            setFromDate(e);
                           }}
                           selectsStart
                           startDate={fromDate}
@@ -57,13 +87,13 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                           dateFormat="yyyy-MM-dd"
                           className={`datePicker shadow_sm`}
                         />
-                      )
+                      );
                     }}
                   />
                 </div>
               </div>
               <div className="form-group date-group">
-                <label >إلي تاريخ</label>
+                <label>إلي تاريخ</label>
                 <div className="datePicker-cont">
                   <Controller
                     name="toDate"
@@ -73,9 +103,9 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                       return (
                         <DatePicker
                           selected={field.value}
-                          onChange={(date) => {
-                            field.onChange(date)
-                            setToDate(date)
+                          onChange={(date: Date) => {
+                            field.onChange(date);
+                            setToDate(date);
                           }}
                           selectsEnd
                           startDate={fromDate}
@@ -84,7 +114,7 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                           dateFormat="yyyy-MM-dd"
                           className={` datePicker shadow_sm`}
                         />
-                      )
+                      );
                     }}
                   />
                 </div>
@@ -94,33 +124,10 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
           <div className="class">
             <h4 className="label">الخدمات المقدمة</h4>
             <div className="services">
-              <CheckBoxInput register={register} name="roomService">
-                <i className="fas fa-bed"></i>
-                روم سيرفس{" "}
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="wifi">
-                <i className="fas fa-wifi"></i>
-                واي فاي{" "}
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="pool">
-                <i className="fas fa-swimming-pool"></i>
-                حمام سباحه
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="irConditioning">
-                <i className="fas fa-snowflake"></i> تكييف
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="balcony">
-                <i className="fas fa-building"></i>
-                بلكونة
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="kitchen">
-                <i className="fas fa-utensils"></i>
-                مطبخ{" "}
-              </CheckBoxInput>
-              <CheckBoxInput register={register} name="parking">
-                <i className="fas fa-car"></i>
-                باركينج
-              </CheckBoxInput>
+              {services &&
+                services?.map((service: Service) => {
+                  return <CheckBoxInput key={service?._id} register={register} required={false} name="services" value={service._id} title={service.name} icon={`${service.name}`} />;
+                })}
             </div>
           </div>
 
@@ -131,7 +138,7 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                 type="button"
                 className="button"
                 onClick={() => {
-                  decrementCount()
+                  decrementCount();
                 }}
               >
                 <i className="fas fa-minus"></i>
@@ -142,7 +149,7 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
                 type="button"
                 className="button"
                 onClick={() => {
-                  incrementCount()
+                  incrementCount();
                 }}
               >
                 <i className="fas fa-plus"></i>
@@ -154,18 +161,18 @@ export const ClassModal = ({ showClass, setShowClass, handleButton, handleSubmit
               العنوان علي الخريطة<span>*</span>
             </h4>
             <div className="map">
-              <Map borderRadius='border-r'/>
+              <Map setLocation={setLocation} location={location} borderRadius="border-r" />
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <div className="button">
-            <Button bgColor="btn-primary" width="w-100" padding="p-9" type="submit">
+            <Button btnPrimary="btn-primary" width="w-100" type="submit">
               إظهار النتائج
             </Button>
           </div>
         </Modal.Footer>
       </form>
     </Modal>
-  )
-}
+  );
+};

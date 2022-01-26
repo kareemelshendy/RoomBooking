@@ -1,18 +1,23 @@
-import { Room } from "../../models"
-import { RoomsGrid } from "../Rooms-grid/rooms-grid"
+import { Room } from "../../models";
+import { NoData } from "../no-data/no-data";
+import { RoomsGrid } from "../rooms-grid/rooms-grid";
 
-export const FavoriteComponent = ({ rooms }: { rooms: Room[] }) => {
+interface Props {
+  rooms: Room[] | undefined;
+  isLoading: boolean;
+}
+
+export const FavoriteComponent = ({ rooms, isLoading }: Props) => {
   return (
-    <div className="container mt-4 ">
+    <div className="container mt-4 " dir="rtl">
       <div className="row">
         <div className="mb-2">
           <h2 className="heading heading-3 heading-bold" dir="rtl">
             المفضلات
           </h2>
         </div>
-
-        <RoomsGrid rooms={rooms} />
+        {rooms?.length === 0 ? <NoData title="لا يوجد غرف" /> : <RoomsGrid rooms={rooms} />}
       </div>
     </div>
-  )
-}
+  );
+};

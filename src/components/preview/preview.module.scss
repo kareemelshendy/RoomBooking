@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    @media (min-width: $device-md) {
+    @media (min-width: $device-lg) {
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-end;
@@ -15,8 +15,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        // justify-content: center;
-        @media (min-width: $device-md) {
+        @media (min-width: $device-lg) {
             flex-direction: row;
         }
     }
@@ -26,21 +25,20 @@
         &:not(:last-child) {
             margin-bottom: 16px;
         }
-        @media (min-width: $device-md) {
+        @media (min-width: $device-lg) {
             width: 130px;
             &:not(:last-child) {
                 margin-bottom: 0;
             }
         }
         button {
-            // color: $primary !important;
             line-height: 30px;
             i {
                 margin-left: 16px;
                 font-size: 18px;
             }
         }
-        @media (min-width: $device-md) {
+        @media (min-width: $device-lg) {
             &:not(:last-child) {
                 margin-left: 16px;
             }
@@ -48,11 +46,12 @@
     }
     .profile_container {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         flex-direction: column;
         margin-top: -85px;
-        @media (min-width: $device-md) {
+        @media (min-width: $device-lg) {
             flex-direction: row;
+            align-items: flex-end;
         }
         .profile_content {
             display: flex;
@@ -60,7 +59,7 @@
             align-items: center;
             margin-right: 16px;
             // margin-bottom: 16px;
-            @media (min-width: $device-md) {
+            @media (min-width: $device-lg) {
                 margin-right: 16px;
                 margin-bottom: 0px;
                 align-items: flex-start;
@@ -92,4 +91,8 @@
     @media (min-width: $device-md) {
         padding: 32px;
     }
+}
+
+.content {
+    padding: 0px;
 }

@@ -20,17 +20,18 @@
     }
     .profile_container {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         flex-direction: column;
         margin-top: -85px;
         @media (min-width: $device-md) {
             flex-direction: row;
+            align-items: flex-end;
         }
         .profile_content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 16px;
+            // margin-right: 16px;
             // margin-bottom: 16px;
             @media (min-width: $device-md) {
                 margin-right: 16px;

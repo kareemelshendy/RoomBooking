@@ -1,10 +1,10 @@
-import React from "react"
-import Header from "../header/header"
-import Head from "next/head"
+import React from "react";
+import Header from "../header/header";
+import Head from "next/head";
 
 export interface LayoutProps {
-  children: React.ReactNode
-  title: string
+  children: React.ReactNode;
+  title: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
   return (
@@ -15,6 +15,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
       <Header />
       <main>{props.children}</main>
     </>
-  )
-}
-export default Layout
+  );
+};
+export default Layout;

@@ -123,7 +123,7 @@
             color: $light-grey;
             cursor: pointer;
             @media (min-width: $device-md) {
-                width: 100%
+                width: 100%;
             }
             @media (min-width: $device-lg) {
                 width: 50%;
@@ -137,7 +137,9 @@
             align-items: center;
             width: 100%;
             // background-color: red;
+            margin-bottom: 20px;
             @media (min-width: $device-md) {
+                margin-bottom: 0px;
                 width: 34px;
             }
             button {

@@ -1,17 +1,17 @@
-import type { NextPage } from "next"
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { Button } from "../components/button/button"
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Button } from "../components/button/button";
 const Home: NextPage = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   function toLogin() {
-    router.push("/login")
+    router.push("/login");
   }
   function toCreateAccount() {
-    router.push("/create")
+    router.push("/create");
   }
   return (
     <>
@@ -29,22 +29,22 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="buttonsContainer mt-3">
-              <Button onClick={toLogin} width="w-100" bgColor="btn-light" padding="btn-p">
-                تسجيل الدخول
-              </Button>
-              <Button
-                width="w-100"
-                textColor="text-white"
-                mt="mt-3"
-                border="border-1"
-                borderColor="border-light"
-                onClick={() => {
-                  router.push("/create-account")
-                }}
-                padding="btn-p"
-              >
-                إنشاء الحساب
-              </Button>
+              <div className="button mb-3">
+                <Button onClick={toLogin} width="w-100" btnWhite="btn-white">
+                  تسجيل الدخول
+                </Button>
+              </div>
+              <div className="button ">
+                <Button
+                  width="w-100"
+                  btnBorderWhite="btn-border-white"
+                  onClick={() => {
+                    router.push("/create-account");
+                  }}
+                >
+                  إنشاء الحساب
+                </Button>
+              </div>
 
               {/* <button
                 className="btn  border-light w-100 border-r text-white btn-p mt-3"
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

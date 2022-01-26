@@ -1,16 +1,39 @@
-import { useState } from "react"
-import { Form } from "react-bootstrap"
-import styles from "./filter.module.scss"
-import DatePicker from "react-datepicker"
-import { Map } from "../map/map"
-import { Controller } from "react-hook-form"
-import Select from "react-select"
-import { MapModal } from "../map-modal/map-modal"
+import { Dispatch, SetStateAction, useState } from "react";
+import { Form } from "react-bootstrap";
+import styles from "./filter.module.scss";
+import DatePicker from "react-datepicker";
+import { Map } from "../map/map";
+import { Control, Controller, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import Select from "react-select";
+import { MapModal } from "../map-modal/map-modal";
 
-export const Filter = ({ handleSubmit, filterHandler, register, setShow, control }: any) => {
-  const [fromDate, setFromDate] = useState(new Date())
-  const [toDate, setToDate] = useState(new Date())
-  const [showMap, setShowMap] = useState(false)
+export interface FormVlaues {
+  numberOfUsers: {
+    label: string;
+    value: string;
+  } | null;
+  fromDate: Date;
+  toDate: Date;
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
+interface Props {
+  register: UseFormRegister<FormVlaues>;
+  handleSubmit: UseFormHandleSubmit<FormVlaues>;
+  filterHandler: (FormVlaues: any) => void;
+  control: Control<FormVlaues, object>;
+  setShow: Dispatch<SetStateAction<boolean>>;
+  show: boolean;
+  location: any;
+  setLocation: Dispatch<any>;
+}
+export const Filter = ({ handleSubmit, filterHandler, control, location, setLocation }: Props) => {
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
+  const [showMap, setShowMap] = useState(false);
+
   const options = [
     { value: "1", label: "1" },
     { value: "2", label: "2" },
@@ -20,17 +43,17 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
     { value: "6", label: "6" },
     { value: "7", label: "7" },
     { value: "8", label: "8" },
-  ]
+  ];
 
   function handleShowMap() {
-    setShowMap(false)
+    setShowMap(false);
   }
   return (
     <>
       <div className={styles.form_container}>
         <form className={`form shadow_sm ${styles.form}`} onSubmit={handleSubmit(filterHandler)}>
           <div className={styles.button}>
-            <button type="submit" className="btn btn-primary w-100">
+            <button type="submit" className="btn btn-primary w-100 d-flex justify-content-center lign-items-center">
               <i className="fas fa-search"></i>
             </button>
           </div>
@@ -43,28 +66,25 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
             <Controller
               name="numberOfUsers"
               control={control}
-              // defaultValue={1}
+              
               render={({ field }) => {
                 return (
                   <Select
                     isRtl={true}
+                    instanceId="karem"
                     classNamePrefix="react-select"
-                    // blurInputOnSelect={false}
                     closeMenuOnScroll={true}
                     escapeClearsValue={true}
-                    // hideSelectedOptions={true}
-                    // isDisabled={true}
-                    // isSearchable={false}
                     maxMenuHeight={264}
                     onMenuScrollToBottom={() => {
-                      console.log("scrolling to bottom")
+                      console.log("scrolling to bottom");
                     }}
-                    value={options.find((c) => c.value === field.value)}
-                    onChange={(val) => field.onChange(val?.value)}
+                    isClearable
+                    {...field}
                     options={options}
                     placeholder="عدد الأفراد"
                   />
-                )
+                );
               }}
             />
           </div>
@@ -83,8 +103,8 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
                     <DatePicker
                       selected={field.value}
                       onChange={(date: Date) => {
-                        field.onChange(date)
-                        setToDate(date)
+                        field.onChange(date);
+                        setToDate(date);
                       }}
                       selectsEnd
                       startDate={fromDate}
@@ -93,7 +113,7 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
                       dateFormat="yyyy-MM-dd"
                       className={`${styles.datePicker} shadow_sm`}
                     />
-                  )
+                  );
                 }}
               />
               <p> : الي تاريخ</p>
@@ -117,8 +137,8 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
                     <DatePicker
                       selected={field.value}
                       onChange={(e: Date) => {
-                        field.onChange(e)
-                        setFromDate(e)
+                        field.onChange(e);
+                        setFromDate(e);
                       }}
                       selectsStart
                       startDate={fromDate}
@@ -127,7 +147,7 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
                       dateFormat="yyyy-MM-dd"
                       className={`${styles.datePicker} shadow_sm`}
                     />
-                  )
+                  );
                 }}
               />
               <p>: من تاريخ</p>
@@ -136,7 +156,7 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
           <div
             className={styles.group}
             onClick={() => {
-              setShowMap(true)
+              setShowMap(true);
             }}
           >
             <div className={styles.label}>
@@ -150,7 +170,7 @@ export const Filter = ({ handleSubmit, filterHandler, register, setShow, control
         </form>
       </div>
 
-      <MapModal showMap={showMap} handleShowMap={handleShowMap} setShowMap={setShowMap} />
+      <MapModal showMap={showMap} handleShowMap={handleShowMap} setLocation={setLocation} location={location} setShowMap={setShowMap} hamdleMarker={() => {}} />
     </>
-  )
-}
+  );
+};

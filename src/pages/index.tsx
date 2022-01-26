@@ -1,99 +1,43 @@
-import Layout from "../components/layout/layout"
-import Head from "next/head"
-import { HomeHOC } from "../hoc/home-hoc/home-hoc"
-import { GetServerSideProps, InferGetServerSidePropsType } from "next"
-import { Room } from "../models"
+import Layout from "../components/layout/layout";
+import Head from "next/head";
+import { HomeHOC } from "../hoc/home-hoc/home-hoc";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { RoomPage } from "../models";
+import axios from "../utils/axios";
 
-const Home = ({ rooms }: { rooms: Room[] }) => {
+import { parseCookies } from "nookies";
+
+// import axios from "axios"
+
+const Home = ({ roomsPage }: { roomsPage: RoomPage }) => {
+  // console.log("fallback", roomsPage)
   return (
     <>
       <Layout title="الصفحة الرئيسية">
-        <HomeHOC rooms={rooms} />
+        <HomeHOC fallbackPage={roomsPage} />
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const rooms: any = [
-    {
-      id: 1,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/bedroom.jpg",
-    },
-    {
-      id: 2,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "500",
-      numberOfUsers: "8",
-      fav: false,
-      image: "/card1.png",
-    },
-    {
-      id: 3,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "800",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/white-sofra.jpg",
-    },
-    {
-      id: 4,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/kids.jpg",
-    },
-    {
-      id: 5,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/bedroom.jpg",
-    },
-    {
-      id: 6,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "500",
-      numberOfUsers: "8",
-      fav: true,
-      image: "/kids.jpg",
-    },
-    {
-      id: 7,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "800",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/white-sofra.jpg",
-    },
-    {
-      id: 8,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/bedroom.png",
-    },
-  ]
-  return {
-    props: {
-      rooms,
-    },
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // console.log(context.query);
+  const pageNumber = context.query.pageNumber;
+  try {
+    const res = await axios.get(`/rooms?pageNumber=${pageNumber}&limit=16`);
+    const rooms = res.data;
+    return {
+      props: {
+        roomsPage: rooms,
+      },
+    };
+  } catch {
+    return {
+      props: {
+        roomsPage: {},
+      },
+    };
   }
-}
+};
 
-export default Home
+export default Home;

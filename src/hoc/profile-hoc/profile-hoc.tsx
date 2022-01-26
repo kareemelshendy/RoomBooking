@@ -1,14 +1,21 @@
-import { Button } from "../../components/button/button"
-import { Card } from "../../components/card/card"
-import { ProfileComponent } from "../../components/profile/profile"
-import { ProfileImage } from "../../components/profileImage/profile-image"
-import { Room } from "../../models"
-import styles from "./profile-hoc.module.scss"
+import { useRouter } from "next/router";
+import { ProfileComponent } from "../../components/profile/profile";
+import { useProfile } from "../../hooks/use-profile.hook";
+import { Owner, RoomPage } from "../../models";
 
-export const ProfileHOC = ({ rooms }: { rooms: Room[] }) => {
+interface Props {
+  profileId: string;
+  fallbackUser: Owner;
+  fallbackPage: RoomPage;
+}
+export const ProfileHOC = ({ profileId, fallbackUser, fallbackPage }: Props) => {
+  const { user, isLoading, isError } = useProfile(profileId, fallbackUser);
+
+  if (isError) return <div>حدث خطئ ما</div>;
+  if (isLoading) return <div>isLoading...</div>;
   return (
     <>
-      <ProfileComponent rooms={rooms} />
+      <ProfileComponent user={user} fallbackPage={fallbackPage} profileId={profileId} />
     </>
-  )
-}
+  );
+};

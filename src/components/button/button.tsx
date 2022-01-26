@@ -1,9 +1,21 @@
-import { Children } from "react"
+interface Props {
+  width?: string;
+  onClick?: any;
+  children?: any;
+  disabled?: boolean;
+  btnBorderWhite?: string;
+  btnPrimary?: string;
+  btnWhite?: string;
+  btnBorderPrimary?: string;
+  btnBorderDarkGrey?: string;
+  btnBorderDanger?: string;
+  type?: any;
+}
 
-export const Button = ({ title, width, toLogin, bgColor = '', mt, border, borderColor, ms, textColor, onClick, type, padding, children, disabled, isValid }: any) => {
+export const Button = ({ width, onClick, type, children, disabled, btnBorderWhite, btnPrimary, btnWhite, btnBorderPrimary, btnBorderDarkGrey, btnBorderDanger }: Props) => {
   return (
-    <button type={type} className={`btn ${bgColor} ${width} ${mt} ${ms} ${padding} ${border} ${borderColor} ${textColor} border-r`} onClick={onClick} role={type} disabled={disabled}>
+    <button type={type} className={`btn ${btnBorderWhite} ${btnPrimary} ${btnWhite} ${btnBorderPrimary} ${btnBorderDarkGrey} ${btnBorderDanger}  ${width} border-r`} onClick={onClick} role={type} disabled={disabled}>
       {children}
     </button>
-  )
-}
+  );
+};

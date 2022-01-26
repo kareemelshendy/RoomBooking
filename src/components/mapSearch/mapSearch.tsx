@@ -1,8 +1,8 @@
-import usePlacesAutocomplete from "use-places-autocomplete"
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox"
-import { ChangeEvent } from "react"
+import usePlacesAutocomplete from "use-places-autocomplete";
+import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
+import { ChangeEvent } from "react";
 
-import styles from "./mapSearch.module.scss"
+import styles from "./mapSearch.module.scss";
 
 export const SearchMap = () => {
   const {
@@ -14,14 +14,14 @@ export const SearchMap = () => {
   } = usePlacesAutocomplete({
     requestOptions: {},
     // debounce: 300,
-  })
+  });
   const handleInput = (e: ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value)
-  }
+    setValue(e.target.value);
+  };
 
   const handleSelect = (val: string): void => {
-    setValue(val, false)
-  }
+    setValue(val, false);
+  };
 
   return (
     <div className="App">
@@ -32,5 +32,5 @@ export const SearchMap = () => {
         </ComboboxPopover>
       </Combobox>
     </div>
-  )
-}
+  );
+};

@@ -46,6 +46,12 @@
             width: 100%;
             @include align-center;
             flex-direction: column;
+            .button {
+                width: 100%;
+                @media (min-width: $device-md) {
+                    width: 374px;
+                }
+            }
         }
     }
 }

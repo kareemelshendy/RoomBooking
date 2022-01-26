@@ -1,7 +1,7 @@
-import { Button } from "../button/button"
-import { PasswordInput } from "../password-input/password-input"
-import styles from "./new-password.module.scss"
-export const NewPasswordComponent = ({ register, handleSubmit, formHandler, errors,getValues }: any) => {
+import { Button } from "../button/button";
+import { PasswordInput } from "../password-input/password-input";
+import styles from "./new-password.module.scss";
+export const NewPasswordComponent = ({ register, handleSubmit, formHandler, errors, getValues }: any) => {
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
@@ -24,18 +24,18 @@ export const NewPasswordComponent = ({ register, handleSubmit, formHandler, erro
               placeholder="تأكيد كلمة المرور الجديدة"
               validate={{
                 checkPassword: (value: string) => {
-                  const { newPassword } = getValues()
-                  return newPassword === value || "كلمات السر لا تتطابق"
+                  const { newPassword } = getValues();
+                  return newPassword === value || "كلمات السر لا تتطابق";
                 },
               }}
             />
           </div>
 
-          <Button width="w-100" padding="py-9" bgColor="btn-primary" type="submit">
+          <Button width="w-100" btnPrimary="btn-primary" type="submit">
             تأكيد
           </Button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

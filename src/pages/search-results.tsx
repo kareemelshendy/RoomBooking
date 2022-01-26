@@ -1,100 +1,63 @@
-import { GetServerSideProps } from "next"
-import React from "react"
-import { Button } from "../components/button/button"
-import { Card } from "../components/card/card"
-import { Filter } from "../components/filter/filter"
-import Layout from "../components/layout/layout"
-import { SearchResultsHOC } from "../hoc/SearchResults-hoc/search-results-hoc"
-import { Room } from "../models"
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import React from "react";
 
-const SearchResults = ({ rooms }: { rooms: Room[] }) => {
+import Layout from "../components/layout/layout";
+import { SearchResultsHOC } from "../hoc/SearchResults-hoc/search-results-hoc";
+import { Location, Room, RoomPage, Service } from "../models";
+import axios from "../utils/axios";
+import { fetcher } from "../utils/fetcher.utils";
+interface Props {
+  roomsPage: RoomPage;
+  services: Service[];
+}
+
+const SearchResults = ({ roomsPage, services }: Props) => {
+  const router = useRouter();
+  const maxNightPrice = router.query.maxNightPrice as string;
+  const minNightPrice = router.query.minNightPrice as string;
+  const service = router.query.service as string[];
+  const lat: string = router.query.latitude as string;
+  const lng: string = router.query.longitude as string;
+  const location = {
+    lat: +lat,
+    lng: +lng,
+  };
+
+  console.log(location);
   return (
     <Layout title="نتائح البحث">
-      <SearchResultsHOC rooms={rooms} />
+      <SearchResultsHOC fallbackServices={services} fallbackPage={roomsPage} defaultLocation={location} service={service} minNightPrice={minNightPrice} maxNightPrice={maxNightPrice} />{" "}
     </Layout>
-  )
-}
+  );
+};
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const rooms: any = [
-    {
-      id: 1,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/bedroom.jpg",
-    },
-    {
-      id: 2,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "500",
-      numberOfUsers: "8",
-      fav: false,
-      image: "/card1.png",
-    },
-    {
-      id: 3,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "800",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/white-sofra.jpg",
-    },
-    {
-      id: 4,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/kids.jpg",
-    },
-    {
-      id: 5,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/bedroom.jpg",
-    },
-    {
-      id: 6,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "500",
-      numberOfUsers: "8",
-      fav: true,
-      image: "/kids.jpg",
-    },
-    {
-      id: 7,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "800",
-      numberOfUsers: "4",
-      fav: false,
-      image: "/white-sofra.jpg",
-    },
-    {
-      id: 8,
-      roomtitle: "غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك",
-      location: "العين السخنة كمباوند أروما الكيلو 39",
-      price: "400",
-      numberOfUsers: "4",
-      fav: true,
-      image: "/bedroom.png",
-    },
-  ]
-  return {
-    props: {
-      rooms,
-    },
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const query = context.query;
+
+  const latitude = query.latitude;
+  const longitude = query.longitude;
+  const minNightPrice = query.minNightPrice;
+  const maxNightPrice = query.maxNightPrice;
+  const service = query.service;
+  const pageNumber = query.pageNumber;
+
+  try {
+    const roomsPage = await fetcher(`/rooms?limit=16&${pageNumber ? `pageNumber=${pageNumber}` : `pageNumber=1`}${latitude ? `&latitude=${latitude}` : ""}${longitude ? `&longitude=${longitude}` : ""}${minNightPrice ? `&minNightPrice=${minNightPrice}` : ""}${maxNightPrice ? `&maxNightPrice=${maxNightPrice}` : ""}&${service ? `service=${service}` : ""}`);
+    const servicesResponse = await axios.get("/services");
+    const services = servicesResponse.data;
+    return {
+      props: {
+        roomsPage,
+        services,
+      },
+    };
+  } catch (error: any) {
+    console.log(error?.response.data.message);
+    return {
+      props: {},
+    };
   }
-}
+};
 
-export default SearchResults
+export default SearchResults;

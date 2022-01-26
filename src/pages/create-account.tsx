@@ -1,7 +1,7 @@
-import { CreateAccountHOC } from "../hoc/create-account-hoc/create-account-hoc"
+import { CreateAccountHOC } from "../hoc/create-account-hoc/create-account-hoc";
 
 const CreateAccount = () => {
-  return <CreateAccountHOC />
-}
+  return <CreateAccountHOC />;
+};
 
-export default CreateAccount
+export default CreateAccount;

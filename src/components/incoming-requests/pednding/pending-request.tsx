@@ -1,24 +1,19 @@
+import { Reservations } from "../../../models";
+import { NoData } from "../../no-data/no-data";
+import { Pagination } from "../../pagination/pagination";
+import { RequestCard } from "../../request-card/request-card";
+import { RequestGrid } from "../../requests-grid/request-grid";
+import styles from "./pending-request.module.scss";
 
-import { IncomingRequestTap } from "../../incoming-request-tap/incoming-request-tap"
-import { RequestCard } from "../../request-card/request-card"
-import styles from "./pending-request.module.scss"
-
-export const PendingRequestComponent = () => {
-  return (
-    <div className="container mt-3">
-      <div className={`row`}>
-        <h2 className="heading heading-bold heading-3 mb-2" dir="rtl">
-          الطلبات الواردة
-        </h2>
-        <div className={styles.container}>
-          <div className="col-md-9" dir="rtl">
-            <RequestCard />
-            <RequestCard />
-            <RequestCard />
-          </div>
-          <IncomingRequestTap />
-        </div>
-      </div>
-    </div>
-  )
+interface Props {
+  requests: Reservations[] | undefined;
+  pageCount: number | undefined;
 }
+export const PendingRequestComponent = ({ requests, pageCount }: Props) => {
+  return (
+    <div className={styles.container}>
+      <RequestGrid requests={requests} pageCount={pageCount} />
+      
+    </div>
+  );
+};

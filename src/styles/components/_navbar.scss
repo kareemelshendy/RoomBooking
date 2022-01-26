@@ -8,8 +8,17 @@
     &-nav {
         height: 100% !important;
         align-items: flex-start;
+        padding: 10px !important;
         @media (min-width: $device-md) {
             align-items: center;
+        }
+    }
+    .create_account {
+        padding: 10px 0;
+        @media (min-width: $device-md) {
+            &:last-child {
+                margin-left: 16px;
+            }
         }
     }
     &-brand {
@@ -104,6 +113,7 @@
         .notifications-dropdown {
             .dropdown-menu {
                 max-height: 392px;
+                min-height: 300px;
                 .notification {
                     padding: 16px;
                     border-bottom: 1px solid $light;
@@ -128,6 +138,8 @@
         }
         .chat-dropdown {
             .dropdown-menu {
+                max-height: 392px;
+                overflow-y: auto;
                 .messages {
                     padding: 16px 16px 16px 24px !important;
                     display: flex;

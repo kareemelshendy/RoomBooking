@@ -1,44 +1,79 @@
-import Image from "next/image"
-import { useRouter } from "next/router"
-import { Button } from "../button/button"
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Room } from "../../models";
+import { Service } from "../../models/servcies.model";
+import axios from "../../utils/axios";
+import { BadgeComponent } from "../badge/badge";
+import { Button } from "../button/button";
 
-import { Map } from "../map/map"
+import { Map } from "../map/map";
+import { ReadOnlyMap } from "../readOnlyMap/readOnlyMap";
 
-import styles from "./room-description.module.scss"
+import styles from "./room-description.module.scss";
 
-export const RoomDescription = ({ buttons }: any) => {
-  const router = useRouter()
+export interface RoomDesc {
+  buttons: boolean;
+  room: Room | undefined;
+}
+
+export const RoomDescription = ({ buttons, room }: RoomDesc) => {
+  const [fav, setfav] = useState(false);
+  const router = useRouter();
+  const { roomid } = router.query;
+
+  useEffect(() => {
+    if (room?.isFavourite) {
+      setfav(true);
+    }
+  }, [room?.isFavourite]);
+
   return (
     <>
       <div className={styles.roomTop}>
-        <h2 className="heading heading-bold heading-3">غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك</h2>
+        <h2 className="heading heading-bold heading-3">{room?.name}</h2>
         <div className={styles.titleContent}>
           <div className={styles.priceAndUser}>
             <div className={` ${styles.price}`}>
-              <p>400 L.E</p>
+              <p>{room?.nightPrice}L.E</p>
             </div>
             <div className={`${styles.users}`}>
               <i className="fas fa-user"></i>
-              <p>4</p>
+              <p>{room?.capacity}</p>
             </div>
           </div>
 
           {buttons && (
             <div className={styles.buttons}>
-              <Button textColor="text-darkGrey" width="w-75" border="border-darkGrey" ms="ms-1">
-                <i className={`fas fa-heart ms-6`}></i>
-                المفضلة
-              </Button>
-              <Button
-                onClick={() => {
-                  router.push("/book-room/1")
-                }}
-                bgColor="btn-primary"
-                width="w-100"
-                padding="btn-p"
-              >
-                أحجز
-              </Button>
+              <div className={styles.favButton}>
+                <Button
+                  btnBorderDarkGrey={fav ? "btn-border-danger" : "btn-border-darkGrey"}
+                  width="w-100"
+                  onClick={async () => {
+                    const response = await axios.patch(`users/favourites/${room?._id}`);
+                    console.log(response.data);
+                    setfav(!fav);
+                    // mutate(`/rooms?pageNumber=2&limit=16`);
+                  }}
+                >
+                  <i className={`fas fa-heart ms-6`}></i>
+                  المفضلة
+                </Button>
+              </div>
+
+              <div className={styles.bookButton}>
+                <Button
+                  onClick={() => {
+                    router.push(`/rooms/${roomid}/book`);
+                  }}
+                  btnPrimary="btn-primary"
+                  width="w-100"
+                  disabled={room?.busy}
+                >
+                  أحجز
+                </Button>
+              </div>
+
               {/* <button className="btn btn-primary w-100 border-r  ">احجز</button> */}
             </div>
           )}
@@ -46,37 +81,28 @@ export const RoomDescription = ({ buttons }: any) => {
       </div>
       <div className={` mt-1 ${styles.details}`}>
         <h3 className="heading heading-bold heading-darkGrey">التفاصيل</h3>
-        <p>غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك غرفة بالعين السخنة في كمباوند أروما بلوك 48 بجانب أكوا بارك</p>
+        <p>{room?.description}</p>
       </div>
 
       <div className={`mt-1 ${styles.services}`}>
         <h3 className="heading heading-bold heading-darkGrey">الخدمات المقدمة</h3>
         <div className={styles.services_content}>
-          <div>
-            <i className="fas fa-bed"></i>
-            <p>روم سيرفيس</p>
-          </div>
-          <div>
-            <i className="fas fa-wifi"></i>
-            <p>واي فاي</p>
-          </div>
-          <div>
-            <i className="fas fa-snowflake"></i>
-            <p>تكييف</p>
-          </div>
-          <div>
-            <i className="fas fa-utensils"></i>
-            <p>مطبخ</p>
-          </div>
+          {room?.services?.map((service: Service) => {
+            return <BadgeComponent key={service._id} title={service.name} bg="bg-warning" icon={`${service.name}`} />;
+          })}
+          {/* <BadgeComponent title="واي فاي" bg="bg-warning" icon="fas fa-wifi" />
+          <BadgeComponent title="تكييف" bg="bg-warning" icon="fas fa-snowflake" />
+          <BadgeComponent title="مطبخ" bg="bg-warning" icon="fas fa-utensils" /> */}
         </div>
       </div>
 
       <div className={`mt-1 ${styles.location}`}>
         <h3 className="heading heading-bold heading-darkGrey">العنوان</h3>
         <div className={styles.map}>
-          <Map borderRadius='border-r' />
+          <ReadOnlyMap borderRadius="border-r" location={room?.location?.coordinates} />
+          {/* <Map borderRadius="border-r" location={room?.location?.coordinates}/> */}
         </div>
       </div>
     </>
-  )
-}
+  );
+};

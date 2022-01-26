@@ -1,14 +1,31 @@
-import { useRouter } from "next/router"
-import { Room } from "../../models"
-import { Button } from "../button/button"
-import { Card } from "../card/card"
-import { ProfileBackGround } from "../profile-backgreound/profile-background"
-import { ProfileImage } from "../profileImage/profile-image"
-import { RoomsGrid } from "../Rooms-grid/rooms-grid"
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector } from "react-redux";
+import { useRooms } from "../../hooks/use-rooms.hook";
+import { Owner, Room, RoomPage } from "../../models";
+import { useCurrentUser } from "../../slices/authSlice";
+import { RootState } from "../../store/store";
+import { Button } from "../button/button";
+import { Card } from "../card/card";
+import { ProfileBackGround } from "../profile-backgreound/profile-background";
+import { ProfileImage } from "../profileImage/profile-image";
+import { RoomsGrid } from "../rooms-grid/rooms-grid";
+import styles from "./profile.module.scss";
+import { useSWRConfig } from "swr";
+import { Pagination } from "../pagination/pagination";
+import { NoData } from "../no-data/no-data";
+interface Props {
+  user: Owner | undefined;
+  fallbackPage: RoomPage;
+  profileId: string;
+}
+export const ProfileComponent = ({ user, fallbackPage, profileId }: Props) => {
+  const router = useRouter();
+  const pageNumber = router.query.pageNumber as string;
+  const { roomsPage, isLoading, isError } = useRooms(pageNumber, fallbackPage, profileId);
+  const currentUser = useSelector(useCurrentUser);
 
-import styles from "./profile.module.scss"
-export const ProfileComponent = ({ rooms }: { rooms: Room[] }) => {
-  const router = useRouter()
   return (
     <>
       <ProfileBackGround />
@@ -16,37 +33,37 @@ export const ProfileComponent = ({ rooms }: { rooms: Room[] }) => {
         <div className="row">
           <div className={styles.profile_top}>
             <div className={styles.profile_container}>
-              <ProfileImage width="160px" height="160px" />
+              <ProfileImage width="160px" height="160px" src={user?.profileImage?.original ? user?.profileImage?.original : "/"} />
               <div className={styles.profile_content}>
-                <h2 className={styles.profile_usename}>حسين صابر الرفاعي </h2>
+                <h2 className={styles.profile_usename}>{user?.name} </h2>
                 <p>
                   <i className="fas fa-door-open"></i>
-                  24 غرفة
+                  {user?.roomCount} غرفة
                 </p>
               </div>
             </div>
-
-            <div className={styles.button}>
-              <Button
-                width="w-100"
-                bgColor="btn-light"
-                borderColor="border-primary"
-                padding="btn-p"
-                onClick={() => {
-                  router.push("/profile-edit/information")
-                }}
-              >
-                تعديل الحساب
-              </Button>
-              {/* <button className="btn btn-primary w-100">تعديل الحساب</button> */}
-            </div>
+            {currentUser?._id === user?._id && (
+              <div className={styles.button}>
+                <Button
+                  width="w-100"
+                  btnBorderPrimary="btn-border-primary"
+                  onClick={() => {
+                    router.push(`/profile/${currentUser?._id}/edit`);
+                  }}
+                >
+                  تعديل الحساب
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
+        {roomsPage?.data?.length === 0 && <NoData title="لا يوجد غرف" />}
         <div className="row mt-3">
-          <RoomsGrid rooms={rooms} />
+          <RoomsGrid rooms={roomsPage?.data} />
         </div>
+        {roomsPage?.data && roomsPage?.data?.length > 0 && <Pagination pageCount={roomsPage?.pageCount} />}
       </div>
     </>
-  )
-}
+  );
+};

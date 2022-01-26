@@ -1,21 +1,34 @@
 @use "../../styles/functions" as *;
 @use "../../styles/variables" as *;
 .form_container {
-    padding: 32px 179px;
+    @media (min-width: $device-lg) {
+        padding: 32px 179px;
+    }
+    width: 100%;
+    .form {
+        position: relative;
+    }
     .date {
         display: flex;
         justify-content: space-between;
+        flex-direction: column;
+        @media (min-width: $device-md) {
+            flex-direction: row;
+        }
         // background-color: red;
         width: 100%;
         .date_group {
-            width: 49%;
+            width: 100%;
             margin-bottom: 24px;
+            @media (min-width: $device-md) {
+                width: 49%;
+            }
         }
         .datePicker_container {
             width: 100%;
-            padding: 12.5px 8.5px;
-            border: 1px solid $light;
-            border-radius: 8px;
+            // // padding: 12.5px 8.5px;
+            // border: 1px solid $light;
+            // border-radius: 8px;
             position: relative;
             i {
                 position: absolute;
@@ -26,13 +39,20 @@
             }
             .datePicker {
                 width: 100% !important;
-                border: none;
+                border: 1px solid $light;
                 box-shadow: none !important;
                 font-size: toRem(14);
                 position: relative;
+                padding: 12.5px 8.5px;
+                border-radius: 8px;
+                color: $secondary;
                 &:focus {
-                    outline-color: transparent;
+                    outline: 1px solid $primary;
+                    // border: 1px solid $primary !important;
                 }
+            }
+            .error {
+                outline: 1px solid $fav !important;
             }
         }
     }

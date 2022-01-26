@@ -1,5 +1,5 @@
-import { Button } from "../button/button"
-import styles from "./forget-password.module.scss"
+import { Button } from "../button/button";
+import styles from "./forget-password.module.scss";
 export const ForgetPasswordComponent = ({ register, handleSubmit, formHandler, errors }: any) => {
   return (
     <div className={styles.container}>
@@ -25,13 +25,13 @@ export const ForgetPasswordComponent = ({ register, handleSubmit, formHandler, e
               dir="rtl"
               placeholder="أدخل رقم الهاتف"
             />
-            {errors.phoneNumber && <span className='error_span'>{errors.phoneNumber.message}</span>}
+            {errors.phoneNumber && <span className="error_span">{errors.phoneNumber.message}</span>}
           </div>
-          <Button width="w-100" padding="py-9" bgColor="btn-primary" type="submit">
+          <Button width="w-100" btnPrimary="btn-primary" type="submit">
             إرسال
           </Button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

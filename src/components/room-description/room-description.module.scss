@@ -24,7 +24,7 @@
             width: 100%;
             // background-color: red;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 20px;
             @media (min-width: $device-sm) {
                 .buttonIcon {
@@ -37,6 +37,13 @@
             }
             @media (min-width: $device-lg) {
                 width: 45%;
+            }
+            .favButton {
+                width: 130px;
+                margin-left: 16px;
+            }
+            .bookButton {
+                width: 177px;
             }
         }
         .priceAndUser {
@@ -109,35 +116,9 @@
         display: flex;
         width: 100%;
         flex-wrap: wrap;
+        margin-bottom: 16px;
         @media (min-width: $device-sm) {
             flex-direction: row;
-        }
-        div {
-            // width: 100%;
-            color: $white;
-            @include align-center;
-            flex-direction: column;
-            background-color: $gold;
-            padding: 2px 8px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            @media (min-width: $device-sm) {
-                flex-direction: row;
-            }
-            p {
-                margin: 0;
-                font-size: toRem(14);
-                line-height: 25px;
-                @media (min-width: $device-sm) {
-                    margin-right: 8px;
-                }
-                i {
-                    margin-left: 2px;
-                }
-            }
-            &:not(:last-child) {
-                margin-left: 8px;
-            }
         }
     }
 }

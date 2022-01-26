@@ -1,5 +1,13 @@
 @use "../functions" as *;
 @use "../variables" as *;
+.modal {
+    // justify-content: center !important;
+    // align-items: center !important;
+    @media (min-width: $device-md) {
+        display: flex !important;
+    }
+}
+
 .modal-content {
     width: 100% !important;
     border-radius: 8px !important;
@@ -30,7 +38,7 @@
     .label {
         font-weight: 700;
         font-size: toRem(16);
-        margin-bottom: 8px;
+        // margin-bottom: 8px;
         line-height: 30px;
         span {
             color: $fav;
@@ -186,6 +194,8 @@
 }
 
 .disable {
+    justify-self: center;
+    align-self: center;
     .modal-content {
         @media (min-width: $device-md) {
             width: 447px !important;
@@ -238,6 +248,8 @@
 .map_modal {
     border-radius: 8px;
     padding: 0px;
+    justify-self: center;
+    align-self: center;
     .modal-body {
         // background-color: red;
         height: 300px;

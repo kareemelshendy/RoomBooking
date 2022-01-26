@@ -3,7 +3,13 @@
 .container {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: center;
     @media (min-width: $device-md) {
         flex-direction: row;
+    }
+    .request {
+        @media (min-width: $device-md) {
+            margin-top: 16px;
+        }
     }
 }

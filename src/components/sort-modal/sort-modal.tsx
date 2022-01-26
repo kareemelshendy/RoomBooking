@@ -1,10 +1,23 @@
-import { Modal } from "react-bootstrap"
-import { Controller } from "react-hook-form"
-import Select from "react-select"
-import { Button } from "../button/button"
-import { Map } from "../map/map"
+import { Dispatch, SetStateAction } from "react";
+import { Modal } from "react-bootstrap";
+import { Control, Controller, FieldValues, UseFormHandleSubmit } from "react-hook-form";
+import Select from "react-select";
+import { Button } from "../button/button";
+import { Map } from "../map/map";
 
-export const SortModal = ({ options, handleSubmit, handleButton, setShowSort, showSort, control }: any) => {
+interface Props {
+  options: {
+    value: string;
+    label: string;
+  }[];
+  handleButton(data: any): void;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  showSort: boolean;
+  setShowSort: Dispatch<SetStateAction<boolean>>;
+  control: Control<FieldValues, object>;
+}
+
+export const SortModal = ({ options, handleSubmit, handleButton, setShowSort, showSort, control }: Props) => {
   return (
     <Modal show={showSort} onHide={() => setShowSort(false)} dir="rtl">
       <form action="" onSubmit={handleSubmit(handleButton)}>
@@ -19,7 +32,7 @@ export const SortModal = ({ options, handleSubmit, handleButton, setShowSort, sh
               control={control}
               defaultValue={options[0].value}
               render={({ field }) => {
-                return <Select id="long-value-select" instanceId="long-value-select" options={options} isRtl={true} defaultValue={options[0]} classNamePrefix="sort-select" onChange={(val) => field.onChange(val?.value)} />
+                return <Select id="long-value-select" instanceId="long-value-select" options={options} isRtl={true} defaultValue={options[0]} classNamePrefix="sort-select" onChange={(val) => field.onChange(val?.value)} />;
               }}
             />
           </div>
@@ -29,18 +42,18 @@ export const SortModal = ({ options, handleSubmit, handleButton, setShowSort, sh
               <span>*</span>
             </h4>
             <div className="map">
-              <Map borderRadius='border-r' />
+              <Map borderRadius="border-r" />
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <div className="button">
-            <Button bgColor="btn-primary" width="w-100" padding="p-9" type="submit">
+            <Button btnPrimary="btn-primary" width="w-100" type="submit">
               إظهار النتائج
             </Button>
           </div>
         </Modal.Footer>
       </form>
     </Modal>
-  )
-}
+  );
+};

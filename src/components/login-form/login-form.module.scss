@@ -2,6 +2,7 @@
 @use "../../styles/functions" as *;
 .form {
     font-size: toRem(14);
+    position: relative;
     label {
         margin-right: 8px;
         margin-bottom: 6px;

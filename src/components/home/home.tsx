@@ -1,10 +1,15 @@
-import styles from "./home.module.scss"
-import { Map } from "../map/map"
-import { FilterHOC } from "../../hoc/filter-hoc/filter-hoc"
-import { Card } from "../card/card"
-import { RoomsGrid } from "../Rooms-grid/rooms-grid"
+import styles from "./home.module.scss";
+import { FilterHOC } from "../../hoc/filter-hoc/filter-hoc";
+import { RoomsGrid } from "../rooms-grid/rooms-grid";
+import { Room } from "../../models";
+import { Pagination } from "../pagination/pagination";
 
-export const HomeComponent = ({ allRooms, show, setShow, handleFav }: any) => {
+interface Props {
+  rooms: Room[] | undefined;
+  isLoading: boolean;
+  pageCount: number | undefined;
+}
+export const HomeComponent = ({ rooms, isLoading, pageCount }: Props) => {
   return (
     <>
       <div className={` ${styles.container}`}>
@@ -17,19 +22,23 @@ export const HomeComponent = ({ allRooms, show, setShow, handleFav }: any) => {
             </div>
           </div>
         </div>
-        <FilterHOC setShow={setShow} />
-        <div className="container mt-4 ">
-          <div className="row">
+        <FilterHOC />
+        <div className="container mt-4 " dir="rtl">
+          <div className={`row ${styles.grid}`}>
             <div className="mb-1">
               <h2 className="heading heading-3 heading-bold" dir="rtl">
                 غرفة قريبة منك !
               </h2>
             </div>
 
-            <RoomsGrid rooms={allRooms} handleFav={handleFav} />
+            <RoomsGrid rooms={rooms} />
+
+            <div className={styles.pagination}>
+              <Pagination pageCount={pageCount} />
+            </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};

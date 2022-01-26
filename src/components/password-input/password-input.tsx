@@ -1,10 +1,10 @@
-import { useState } from "react"
-import Link from "next/link"
+import { useState } from "react";
+import Link from "next/link";
 
-import styles from "./passwor-input.module.scss"
+import styles from "./passwor-input.module.scss";
 
 export const PasswordInput = ({ register, error, message, name, forget, title, requiredMessage, validate, placeholder }: any) => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
   return (
     <>
@@ -18,14 +18,14 @@ export const PasswordInput = ({ register, error, message, name, forget, title, r
           <i
             className={`${show ? "fas fa-eye-slash" : "fas fa-eye"}`}
             onClick={() => {
-              setShow(!show)
+              setShow(!show);
             }}
           ></i>
         </div>
         <input
           {...register(name, {
             required: requiredMessage,
-            minLength: { value: 7, message: "كلمة المرور يجب أن تكون أكثر من 6 أحرف" },
+            minLength: { value: 6, message: "كلمة المرور يجب أن تكون أكثر من 5 أحرف" },
             validate: validate,
           })}
           type={show ? "text" : "password"}
@@ -43,5 +43,5 @@ export const PasswordInput = ({ register, error, message, name, forget, title, r
         )}
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,22 +1,16 @@
-import React, { useState } from "react"
-import styles from "./home-hoc.module.scss"
-import { Card } from "../../components/card/card"
-import { Filter } from "../../components/filter/filter"
-import { Map } from "../../components/map/map"
-import { FilterHOC } from "../filter-hoc/filter-hoc"
-import { Room } from "../../models"
-import { HomeComponent } from "../../components/home/home"
+import React, { useEffect, useState } from "react";
 
-export const HomeHOC = ({ rooms }: { rooms: Room[] }) => {
-  const [show, setShow] = useState(false)
+import { HomeComponent } from "../../components/home/home";
+import { useRooms } from "../../hooks/use-rooms.hook";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { RoomPage } from "../../models";
+import { useRouter } from "next/router";
 
-  const [allRooms, setAllRooms] = useState(rooms)
+export const HomeHOC = ({ fallbackPage }: { fallbackPage: RoomPage }) => {
+  const [show, setShow] = useState(false);
+  const router = useRouter();
+  const pageNumber: string = router.query.pageNumber as string;
+  const { roomsPage, isLoading, isError } = useRooms(pageNumber, fallbackPage, "");
 
-  function handleFav(room: any) {
-    const roomIndex = allRooms.indexOf(room)
-    allRooms[roomIndex].fav = !allRooms[roomIndex].fav
-    const newRooms = [...allRooms]
-    setAllRooms(newRooms)
-  }
-  return <HomeComponent allRooms={allRooms} handleFav={handleFav} show={show} setShow={setShow} />
-}
+  return <HomeComponent rooms={roomsPage?.data} pageCount={roomsPage?.pageCount} isLoading={isLoading} />;
+};

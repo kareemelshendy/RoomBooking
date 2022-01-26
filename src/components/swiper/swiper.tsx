@@ -1,172 +1,76 @@
-import Image from "next/image"
-import SwiperClass from "swiper/types/swiper-class"
-import { useState } from "react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import SwiperCore, { Pagination, Navigation, Thumbs, Autoplay, Controller } from "swiper"
+import SwiperClass from "swiper/types/swiper-class";
+import styles from "./swiper.module.scss";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
+import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import { ImageModel, Room } from "../../models";
+import { Blurhash } from "react-blurhash";
+SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
-import styles from "./swiper.module.scss"
-export const SwiperComponent = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>()
-  const [controlledSwiper, setControlledSwiper] = useState<SwiperClass>()
-
+export const SwiperComponent = ({ room }: { room: Room | undefined }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>();
+  const [controlledSwiper, setControlledSwiper] = useState<SwiperClass>();
+  const [isImageReady, setIsImageReady] = useState(false);
   return (
     <>
-      <div>
-        <Swiper
-          modules={[Controller, Pagination, Navigation, Thumbs]}
-          slidesPerView={1}
-          spaceBetween={30}
-          // pagination={{
-          //   clickable: true,
-          // }}
-          loop={true}
-          navigation
-          className={`mySwiper`}
-          onSlideChange={() => console.log("slide change")}
-          thumbs={{ swiper: controlledSwiper }}
-          controller={{ control: controlledSwiper }}
-        >
-          <SwiperSlide>
-            <div className={styles.swiperImage}>
-              <Image src="/cozy-studio-apartment-with-bedroom-living-space.png" layout="fill" alt="cover image" priority />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.swiperImage}>
-              <Image src="/diningroom.jpg" layout="fill" alt="cover image" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.swiperImage}>
-              <Image src="/livingroom.jpg" layout="fill" alt="cover image" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.swiperImage}>
-              <Image src="/kids.jpg" layout="fill" alt="cover image" />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.swiperImage}>
-              <Image src="/white-sofra.jpg" layout="fill" alt="cover image" />
-            </div>
-          </SwiperSlide>
+      <section>
+        <Swiper slidesPerView={1} spaceBetween={30} loop={true} navigation className={`mySwiper`} dir="ltr" thumbs={{ swiper: thumbsSwiper }} controller={{ control: controlledSwiper }}>
+          {room?.images?.map((image: ImageModel) => {
+            return (
+              <SwiperSlide key={image.placeholder}>
+                <div className={styles.swiperImage}>
+                  {image && (
+                    <>
+                      <Blurhash hash={image?.placeholder} width={"100%"} height={"100%"} />
+                      <Image
+                        src={image?.original ? image?.original : "/"}
+                        layout="fill"
+                        alt="cover image"
+                        onLoad={() => {
+                          setIsImageReady(true);
+                        }}
+                        className={isImageReady ? "imageReady" : "imageNotReady"}
+                      />
+                    </>
+                  )}
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
+        <Swiper onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={room?.images.length} freeMode={true} watchSlidesProgress={true} className="mySwiper2">
+          {room?.images.map((image, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <div className={styles.control}>
+                  {image && (
+                    <>
+                      <Blurhash hash={image?.placeholder} width={"100%"} height={"100%"} className="card_blurhash" />
 
-        <div className={styles.control}>
-          <Swiper modules={[Controller, Thumbs]} freeMode={true} slidesPerView={5} spaceBetween={16} watchSlidesProgress={true} onSwiper={setControlledSwiper} className="mySwiper2">
-            <SwiperSlide>
-              <div className={` ${styles.swiperThumbs}`}>
-                <Image src="/cozy-studio-apartment-with-bedroom-living-space.png" layout="fill" alt="cover image" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.swiperThumbs}>
-                <Image src="/diningroom.jpg" layout="fill" alt="cover image" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.swiperThumbs}>
-                <Image src="/livingroom.jpg" layout="fill" alt="cover image" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.swiperThumbs}>
-                <Image src="/kids.jpg" layout="fill" alt="cover image" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.swiperThumbs}>
-                <Image src="/white-sofra.jpg" layout="fill" alt="cover image" />
-              </div>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </div>
+                      <Image
+                        src={image?.original ? image?.original : "/"}
+                        layout="fill"
+                        objectFit="cover"
+                        alt="cover image"
+                        onLoad={() => {
+                          setIsImageReady(true);
+                          // setTimeout(() => {}, 50000)
+                        }}
+                        className={isImageReady ? "imageReady" : "imageNotReady"}
+                      />
+                    </>
+                  )}
+                </div>{" "}
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </section>
     </>
-  )
-}
-
-{
-  /* <div className="container mt-3">
-        <div className="row">
-          <div className="col">
-            <Swiper
-              modules={[Pagination, Navigation, Thumbs]}
-              slidesPerView={1}
-              spaceBetween={30}
-              loop={true}
-              pagination={{
-                clickable: true,
-              }}
-              navigation
-              className="mySwiper"
-              thumbs={{ swiper: thumbsSwiper }}
-              onSlideChange={() => console.log("slide change")}
-            >
-              <SwiperSlide>
-                <div className={styles.swiperImage}>
-                  <Image src="/cozy-studio-apartment-with-bedroom-living-space.png" layout="fill" alt="cover image" priority />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.swiperImage}>
-                  <Image src="/diningroom.jpg" layout="fill" alt="cover image" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.swiperImage}>
-                  <Image src="/livingroom.jpg" layout="fill" alt="cover image" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.swiperImage}>
-                  <Image src="/kids.jpg" layout="fill" alt="cover image" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className={styles.swiperImage}>
-                  <Image src="/white-sofra.jpg" layout="fill" alt="cover image" />
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mt-2">
-        <div className="row">
-          <div className="col">
-            <div className={styles.control}>
-              <Swiper modules={[Thumbs]} slidesPerView={5} spaceBetween={10} onSwiper={setThumbsSwiper} watchSlidesProgress={true}>
-                <SwiperSlide>
-                  <div className={` ${styles.swiperThumbs}`}>
-                    <Image src="/cozy-studio-apartment-with-bedroom-living-space.png" layout="fill" alt="cover image" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className={styles.swiperThumbs}>
-                    <Image src="/diningroom.jpg" layout="fill" alt="cover image" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className={styles.swiperThumbs}>
-                    <Image src="/livingroom.jpg" layout="fill" alt="cover image" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className={styles.swiperThumbs}>
-                    <Image src="/kids.jpg" layout="fill" alt="cover image" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className={styles.swiperThumbs}>
-                    <Image src="/white-sofra.jpg" layout="fill" alt="cover image" />
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-          </div>
-        </div>
-      </div> */
-}
+  );
+};

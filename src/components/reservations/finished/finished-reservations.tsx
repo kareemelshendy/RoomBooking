@@ -1,20 +1,16 @@
-import { Room } from "../../../models"
+import { Reservations, Room } from "../../../models";
 
-import { ReservationsGrid } from "../../reservations-grid/reservations-grid"
-import { ReservationsTap } from "../../reservations-tap/reservations-tap"
-import styles from "./finished-reservations.module.scss"
-export const FinishedReservationsComponent = ({ rooms }: { rooms: Room[] }) => {
-  return (
-    <div className="container mt-3">
-    <div className="row">
-      <h2 className="heading heading-bold heading-3 mb-2" dir="rtl">
-        حجوزاتي
-      </h2>
-      <div className={styles.container}>
-        <ReservationsGrid rooms={rooms} />
-        <ReservationsTap />
-      </div>
-    </div>
-  </div>
-  )
+import { ReservationsGrid } from "../../reservations-grid/reservations-grid";
+import styles from "./finished-reservations.module.scss";
+
+interface Props {
+  reservations: Reservations[] | undefined;
+  pageCount: number | undefined;
 }
+export const FinishedReservationsComponent = ({ reservations, pageCount }: Props) => {
+  return (
+    <div className={styles.container}>
+      <ReservationsGrid reservations={reservations} pageCount={pageCount} />
+    </div>
+  );
+};

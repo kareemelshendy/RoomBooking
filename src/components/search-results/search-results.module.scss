@@ -4,7 +4,7 @@
     margin: 0;
     width: 100%;
     position: relative;
-    @media (min-width: $device-lg) {
+    @media (min-width: $device-md) {
         margin-top: 64px;
     }
     .searchTop {
@@ -19,6 +19,12 @@
         .buttons {
             width: 80%;
             display: flex;
+            .button {
+                width: 130px;
+                &:last-child {
+                    margin-left: 16px;
+                }
+            }
             button {
                 display: flex;
                 align-items: center;
